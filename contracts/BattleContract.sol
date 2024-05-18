@@ -53,6 +53,6 @@ contract BattleContract {
     function setChallengerChampionId(address _challenger, uint _championId) public {
         Challenger storage challenger = challengerMap[_challenger];
         challenger.currentChampionId = _championId;
-    
+ }   
 }
     
