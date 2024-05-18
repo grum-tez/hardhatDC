@@ -27,18 +27,7 @@ describe("BattleContract", function () {
     expect(champion7.strength).to.equal(100000);
     expect(champion7.hidden).to.equal(true);
   });
-  // it("Should register a new challenger", async function () {
-  //   const [owner, challenger] = await ethers.getSigners();
-  //   const battleContract = await ethers.deployContract("BattleContract", [6]);
 
-  //   await battleContract.connect(challenger).registerAsChallenger(3);
-
-  //   const challengerMap = await battleContract.challengerMap
-
-  //   const registeredChallenger = await battleContract.challengerMap(challenger.address);
-  //   expect(registeredChallenger.currentChampionId).to.equal(1);
-    // expect(registeredChallenger.fightHistory.length).to.equal(0);
-  // });
   it("Should get the correct challenger details", async function () {
     const [owner, challenger] = await ethers.getSigners();
     const battleContract = await ethers.deployContract("BattleContract", [6]);
@@ -60,4 +49,18 @@ describe("BattleContract", function () {
     const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
     expect(currentChampionId).to.equal(5);
   });
+
+  //TODO uncomment the function below and update it to use the getter to implement the test
+    // it("Should register a new challenger", async function () {
+  //   const [owner, challenger] = await ethers.getSigners();
+  //   const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+  //   await battleContract.connect(challenger).registerAsChallenger(3);
+
+  //   const challengerMap = await battleContract.challengerMap
+
+  //   const registeredChallenger = await battleContract.challengerMap(challenger.address);
+  //   expect(registeredChallenger.currentChampionId).to.equal(1);
+    // expect(registeredChallenger.fightHistory.length).to.equal(0);
+  // });
 });
