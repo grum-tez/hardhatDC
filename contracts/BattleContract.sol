@@ -10,8 +10,6 @@ contract BattleContract {
         uint strength;
         bool hidden;
     }
-}
-
     struct FightRecord {
         uint256 fightTimestamp;
         bool didChallengerWin;
@@ -44,7 +42,7 @@ contract BattleContract {
         delete newChallenger.fightHistory; // Ensure the fight history is empty
     }
 
-        // Getter function for the Challenger struct
+    // Getter function for the Challenger struct
     function getChallenger(address _challenger) public view returns (uint, FightRecord[] memory) {
         Challenger storage challenger = challengerMap[_challenger];
         return (challenger.currentChampionId, challenger.fightHistory);
@@ -54,7 +52,8 @@ contract BattleContract {
     function setChallengerChampionId(address _challenger, uint _championId) public {
         Challenger storage challenger = challengerMap[_challenger];
         challenger.currentChampionId = _championId;
- }   
+    }   
+
     function challengeBattlemaster() public {
         require(challengerMap[msg.sender].currentChampionId != 0, "Challenger not registered");
 
@@ -80,3 +79,4 @@ contract BattleContract {
         // Update the fight history
         challengerRecord.fightHistory.push(fightRecord);
     }
+}
