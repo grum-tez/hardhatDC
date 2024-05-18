@@ -39,4 +39,25 @@ describe("BattleContract", function () {
   //   expect(registeredChallenger.currentChampionId).to.equal(1);
     // expect(registeredChallenger.fightHistory.length).to.equal(0);
   // });
+  it("Should get the correct challenger details", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(3);
+
+    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(currentChampionId).to.equal(3);
+    expect(fightHistory.length).to.equal(0);
+  });
+
+  it("Should set the correct challenger champion ID", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(3);
+    await battleContract.setChallengerChampionId(challenger.address, 5);
+
+    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(currentChampionId).to.equal(5);
+  });
 });
