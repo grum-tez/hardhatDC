@@ -29,12 +29,11 @@ contract BattleContract {
         Champion memory champion = champion_map[id];
         return (champion.name, champion.strength, champion.hidden);
 
-    // Mapping to store champion data
+// Mapping to store champion data
     mapping(uint256 => Champion) public champion_map;
 
     // Constructor to initialize the contract
     constructor() {
-        // Initialize the battle master champion ID to 6
         battle_master_champion_id = 6;
     }
 }
