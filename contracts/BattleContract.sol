@@ -38,12 +38,9 @@ contract BattleContract {
     }
 
     function registerAsChallenger(uint _championId) public {
-        FightRecord[] memory emptyFightHistory;
-        Challenger memory newChallenger = Challenger({
-            currentChampionId: _championId,
-            fightHistory: emptyFightHistory
-        });
-        challengerMap[msg.sender] = newChallenger;
+        Challenger storage newChallenger = challengerMap[msg.sender];
+        newChallenger.currentChampionId = _championId;
+        delete newChallenger.fightHistory; // Ensure the fight history is empty
     }
 }
     
