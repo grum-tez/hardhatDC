@@ -28,5 +28,3 @@ describe("BattleContract", function () {
     expect(champion7.hidden).to.equal(true);
   });
 });
-
-//TODO check that that the values of 1, 6 and 7 in the champion map are as expected
