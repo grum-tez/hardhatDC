@@ -56,3 +56,28 @@ contract BattleContract {
  }   
 }
     
+    function challengeBattlemaster() public {
+        require(challengerMap[msg.sender].currentChampionId != 0, "Challenger not registered");
+
+        // Retrieve the challenger's champion and the battlemaster's champion
+        Challenger storage challengerRecord = challengerMap[msg.sender];
+        uint challengerChampionId = challengerRecord.currentChampionId;
+        Champion storage challengerChampionRecord = championMap[challengerChampionId];
+        Champion storage battlemasterChampionRecord = championMap[battle_master_champion_id];
+
+        // Compare strengths
+        uint challengerStrength = challengerChampionRecord.strength;
+        uint battlemasterStrength = battlemasterChampionRecord.strength;
+        bool didChallengerWin = challengerStrength > battlemasterStrength;
+
+        // Create a fight record
+        FightRecord memory fightRecord = FightRecord({
+            fightTimestamp: block.timestamp,
+            didChallengerWin: didChallengerWin,
+            battlemasterChampion: battlemasterChampionRecord.name,
+            challengerChampion: challengerChampionRecord.name
+        });
+
+        // Update the fight history
+        challengerRecord.fightHistory.push(fightRecord);
+    }

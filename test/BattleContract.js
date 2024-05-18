@@ -60,4 +60,16 @@ describe("BattleContract", function () {
     expect(currentChampionId).to.equal(3);
     expect(fightHistory.length).to.equal(0);
   });
+  it("Should allow a challenger to challenge the battlemaster and update fight history", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(3);
+    await battleContract.connect(challenger).challengeBattlemaster();
+
+    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(fightHistory.length).to.equal(1);
+    expect(fightHistory[0].battlemasterChampion).to.equal("dragon");
+    expect(fightHistory[0].challengerChampion).to.equal("termite");
+  });
 });
