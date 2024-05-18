@@ -37,5 +37,13 @@ contract BattleContract {
         championMap[7] = Champion("nano-bots", 100000, true);
     }
 
+    function registerAsChallenger(uint _championId) public {
+        FightRecord[] memory emptyFightHistory;
+        Challenger memory newChallenger = Challenger({
+            currentChampionId: _championId,
+            fightHistory: emptyFightHistory
+        });
+        challengerMap[msg.sender] = newChallenger;
+    }
 }
     
