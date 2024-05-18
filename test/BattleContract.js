@@ -85,4 +85,17 @@ describe("BattleContract", function () {
     expect(fightHistory[0].challengerChampion).to.equal("mouse");
     expect(fightHistory[0].didChallengerWin).to.equal(false); // Confirm the user lost
   });
+  it("Should confirm that a user who registered as nanobots won their most recent fight against the battlemaster", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(7); // Register as nanobots
+    await battleContract.connect(challenger).challengeBattlemaster();
+
+    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(fightHistory.length).to.equal(1);
+    expect(fightHistory[0].battlemasterChampion).to.equal("dragon");
+    expect(fightHistory[0].challengerChampion).to.equal("nano-bots");
+    expect(fightHistory[0].didChallengerWin).to.equal(true); // Confirm the user won
+  });
 });
