@@ -36,6 +36,42 @@
       "artifacts": [
         "Token"
       ]
+    },
+    "/workspaces/hardhatDC/contracts/BattleContract.sol": {
+      "lastModificationDate": 1716006975458,
+      "contentHash": "50bd6fe1e20a31f87c96a9456311a7e6",
+      "sourceName": "contracts/BattleContract.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BattleContract"
+      ]
     }
   }
 }
