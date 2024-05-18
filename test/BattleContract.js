@@ -98,4 +98,22 @@ describe("BattleContract", function () {
     expect(fightHistory[0].challengerChampion).to.equal("nano-bots");
     expect(fightHistory[0].didChallengerWin).to.equal(true); // Confirm the user won
   });
+  it("Should allow a user to re-register as a different champion and override their previous entry", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(2); // Register as mouse
+    await battleContract.connect(challenger).registerAsChallenger(7); // Re-register as nanobots
+
+    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(currentChampionId).to.equal(7); // Confirm the user is now registered as nanobots
+
+    await battleContract.connect(challenger).challengeBattlemaster();
+
+    const [updatedChampionId, updatedFightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(updatedFightHistory.length).to.equal(1);
+    expect(updatedFightHistory[0].battlemasterChampion).to.equal("dragon");
+    expect(updatedFightHistory[0].challengerChampion).to.equal("nano-bots");
+    expect(updatedFightHistory[0].didChallengerWin).to.equal(true); // Confirm the user won
+  });
 });
