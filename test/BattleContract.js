@@ -72,4 +72,17 @@ describe("BattleContract", function () {
     expect(fightHistory[0].battlemasterChampion).to.equal("dragon");
     expect(fightHistory[0].challengerChampion).to.equal("termite");
   });
+  it("Should confirm that a user who registered as a mouse lost their most recent fight against the battlemaster", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(2); // Register as mouse
+    await battleContract.connect(challenger).challengeBattlemaster();
+
+    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
+    expect(fightHistory.length).to.equal(1);
+    expect(fightHistory[0].battlemasterChampion).to.equal("dragon");
+    expect(fightHistory[0].challengerChampion).to.equal("mouse");
+    expect(fightHistory[0].didChallengerWin).to.equal(false); // Confirm the user lost
+  });
 });
