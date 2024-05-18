@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/workspaces/hardhatDC/hardhat-tutorial/contracts/Token.sol": {
+    "/workspaces/hardhatDC/contracts/Token.sol": {
       "lastModificationDate": 1715978672183,
       "contentHash": "22043a34aac41f6465fb6525590dc0c7",
       "sourceName": "contracts/Token.sol",
