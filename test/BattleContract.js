@@ -9,3 +9,5 @@ describe("BattleContract", function () {
     expect(await battleContract.battle_master_champion_id()).to.equal(6);
   });
 })
+
+//TODO check that that the values of 1, 6 and 7 in the champion map are as expected
