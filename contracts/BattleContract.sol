@@ -27,7 +27,7 @@ contract BattleContract {
     mapping(address => Challenger) public challengerMap;
 
     constructor(uint _battleMasterChampionId) {
-        battleMasterChampionId = _battleMasterChampionId;
+        battle_master_champion_id = _battleMasterChampionId;
         championMap[1] = Champion("gnat", 1, false);
         championMap[2] = Champion("mouse", 4, false);
         championMap[3] = Champion("termite", 2, false);
