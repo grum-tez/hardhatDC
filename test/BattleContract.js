@@ -14,4 +14,5 @@ describe("BattleContract", function () {
     const hardhatToken = await ethers.deployContract("BattleContract");
     const battleMasterChampionId = await hardhatToken.battle_master_champion_id();
     expect(battleMasterChampionId).to.equal(6);
+  });
 });
