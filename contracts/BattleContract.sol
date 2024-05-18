@@ -10,6 +10,7 @@ contract BattleContract {
         uint strength;
         bool hidden;
     }
+}
 
     struct FightRecord {
         uint256 fightTimestamp;
@@ -54,8 +55,6 @@ contract BattleContract {
         Challenger storage challenger = challengerMap[_challenger];
         challenger.currentChampionId = _championId;
  }   
-}
-    
     function challengeBattlemaster() public {
         require(challengerMap[msg.sender].currentChampionId != 0, "Challenger not registered");
 
