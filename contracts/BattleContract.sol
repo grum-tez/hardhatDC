@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
 contract BattleContract {
@@ -37,6 +38,5 @@ contract BattleContract {
         championMap[7] = Champion("nano-bots", 100000, true);
     }
 
-    // Constructor to initialize the contract
 }
     
