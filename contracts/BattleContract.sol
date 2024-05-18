@@ -23,7 +23,6 @@ contract BattleContract {
         FightRecord[] fightHistory;
     }
 
-    uint public battleMasterChampionId;
     mapping(uint => Champion) public championMap;
     mapping(address => Challenger) public challengerMap;
 
