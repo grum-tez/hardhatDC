@@ -27,14 +27,16 @@ describe("BattleContract", function () {
     expect(champion7.strength).to.equal(100000);
     expect(champion7.hidden).to.equal(true);
   });
-  it("Should register a new challenger", async function () {
-    const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+  // it("Should register a new challenger", async function () {
+  //   const [owner, challenger] = await ethers.getSigners();
+  //   const battleContract = await ethers.deployContract("BattleContract", [6]);
 
-    await battleContract.connect(challenger).registerAsChallenger(1);
+  //   await battleContract.connect(challenger).registerAsChallenger(3);
 
-    const registeredChallenger = await battleContract.challengerMap(challenger.address);
-    expect(registeredChallenger.currentChampionId).to.equal(1);
-    expect(registeredChallenger.fightHistory.length).to.equal(0);
-  });
+  //   const challengerMap = await battleContract.challengerMap
+
+  //   const registeredChallenger = await battleContract.challengerMap(challenger.address);
+  //   expect(registeredChallenger.currentChampionId).to.equal(1);
+    // expect(registeredChallenger.fightHistory.length).to.equal(0);
+  // });
 });

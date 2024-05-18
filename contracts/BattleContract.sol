@@ -42,5 +42,17 @@ contract BattleContract {
         newChallenger.currentChampionId = _championId;
         delete newChallenger.fightHistory; // Ensure the fight history is empty
     }
+
+        // Getter function for the Challenger struct
+    function getChallenger(address _challenger) public view returns (uint, FightRecord[] memory) {
+        Challenger storage challenger = challengerMap[_challenger];
+        return (challenger.currentChampionId, challenger.fightHistory);
+    }
+
+    // Setter function for the Challenger struct
+    function setChallengerChampionId(address _challenger, uint _championId) public {
+        Challenger storage challenger = challengerMap[_challenger];
+        challenger.currentChampionId = _championId;
+    
 }
     
