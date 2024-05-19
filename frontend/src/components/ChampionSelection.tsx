@@ -1,13 +1,18 @@
 // src/components/ChampionSelection.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import './ChampionSelection.css';
 
 type ChampionSelectionProps = {
   onSelect: (id: string) => void;
+  onBecomeChallenger: () => void;
   selectedChampionId: string;
 };
 
-const ChampionSelection: React.FC<ChampionSelectionProps> = ({ onSelect, selectedChampionId }) => {
+const ChampionSelection: React.FC<ChampionSelectionProps> = ({
+  onSelect,
+  onBecomeChallenger,
+  selectedChampionId
+}) => {
   const champions = [
     { id: '1', name: 'Champion 1', image: 'https://via.placeholder.com/100' },
     { id: '2', name: 'Champion 2', image: 'https://via.placeholder.com/100' },
@@ -31,7 +36,7 @@ const ChampionSelection: React.FC<ChampionSelectionProps> = ({ onSelect, selecte
           </div>
         ))}
       </div>
-      <button className="challenger-button" onClick={() => onSelect(selectedChampionId)}>
+      <button className="challenger-button" onClick={onBecomeChallenger}>
         Become a challenger
       </button>
     </div>

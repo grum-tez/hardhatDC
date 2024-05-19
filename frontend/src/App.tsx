@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
+import ChampionMap from './components/ChampionMap';
 import './App.css';
 
 const App: React.FC = () => {
@@ -53,6 +54,21 @@ const App: React.FC = () => {
     }
   };
 
+  const challengeBattleMaster = async () => {
+    try {
+      setLoading(true);
+      const contract = await getContract();
+      const tx = await contract.challengeBattlemaster();
+      await tx.wait();
+      setMessage('Challenge sent successfully!');
+      setLoading(false);
+    } catch (error) {
+      console.error('Error challenging Battle Master:', error);
+      setMessage('Error challenging Battle Master');
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -60,9 +76,16 @@ const App: React.FC = () => {
   return (
     <div>
       {!challengerId ? (
-        <ChampionSelection onSelect={handleSelectChampion} selectedChampionId={selectedChampionId} />
+        <>
+          <ChampionSelection
+            onSelect={handleSelectChampion}
+            onBecomeChallenger={becomeChallenger}
+            selectedChampionId={selectedChampionId}
+          />
+          <ChampionMap />
+        </>
       ) : (
-        <ChallengerDashboard challengerId={challengerId} onFight={becomeChallenger} />
+        <ChallengerDashboard challengerId={challengerId} onFight={challengeBattleMaster} />
       )}
       {message && <p>{message}</p>}
     </div>
