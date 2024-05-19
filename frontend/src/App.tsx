@@ -1,12 +1,16 @@
 // src/App.tsx
 import React, { useState, useEffect } from 'react';
 import { getContract } from './contractService';
+import ChampionSelection from './components/ChampionSelection';
+import ChallengerDashboard from './components/ChallengerDashboard';
+import './App.css';
 
 const App: React.FC = () => {
   const [battleMasterChampionId, setBattleMasterChampionId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
   const [challengerId, setChallengerId] = useState<string>('');
+  const [selectedChampionId, setSelectedChampionId] = useState<string>('');
 
   useEffect(() => {
     const fetchBattleMasterChampionId = async () => {
@@ -24,27 +28,22 @@ const App: React.FC = () => {
     fetchBattleMasterChampionId();
   }, []);
 
-  const challengeBattleMaster = async () => {
-    try {
-      setLoading(true);
-      const contract = await getContract();
-      const tx = await contract.challengeBattlemaster();
-      await tx.wait();
-      setMessage('Challenge sent successfully!');
-      setLoading(false);
-    } catch (error) {
-      console.error('Error challenging Battle Master:', error);
-      setMessage('Error challenging Battle Master');
-      setLoading(false);
-    }
+  const handleSelectChampion = (id: string) => {
+    setSelectedChampionId(id);
   };
 
-  const registerAsChallenger = async () => {
+  const becomeChallenger = async () => {
+    if (!selectedChampionId) {
+      setMessage('Please select a champion first!');
+      return;
+    }
+
     try {
       setLoading(true);
       const contract = await getContract();
-      const tx = await contract.registerAsChallenger(challengerId);
+      const tx = await contract.registerAsChallenger(selectedChampionId);
       await tx.wait();
+      setChallengerId(selectedChampionId);
       setMessage('Registered as challenger successfully!');
       setLoading(false);
     } catch (error) {
@@ -54,27 +53,18 @@ const App: React.FC = () => {
     }
   };
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
-      <h1>Battle DApp</h1>
-      {loading ? (
-        <p>Loading...</p>
+      {!challengerId ? (
+        <ChampionSelection onSelect={handleSelectChampion} selectedChampionId={selectedChampionId} />
       ) : (
-        <>
-          <p>Battle Master Champion ID: {battleMasterChampionId}</p>
-          <button onClick={challengeBattleMaster}>Challenge Battle Master</button>
-          <div>
-            <input
-              type="text"
-              value={challengerId}
-              onChange={(e) => setChallengerId(e.target.value)}
-              placeholder="Enter your champion ID"
-            />
-            <button onClick={registerAsChallenger}>Register as Challenger</button>
-          </div>
-          <p>{message}</p>
-        </>
+        <ChallengerDashboard challengerId={challengerId} onFight={becomeChallenger} />
       )}
+      {message && <p>{message}</p>}
     </div>
   );
 };

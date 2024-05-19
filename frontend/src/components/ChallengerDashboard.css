@@ -1,0 +1,37 @@
+/* src/components/ChallengerDashboard.css */
+.challenger-dashboard {
+    text-align: center;
+  }
+  
+  .battle-arena {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .champion,
+  .battle-master {
+    text-align: center;
+  }
+  
+  .vs {
+    font-size: 24px;
+  }
+  
+  .fight-button {
+    background-color: #6f42c1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .fight-button:hover {
+    background-color: #4b297a;
+  }
+  
