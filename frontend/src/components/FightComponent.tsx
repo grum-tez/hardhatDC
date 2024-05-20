@@ -3,11 +3,13 @@ import './ChallengerDashboard.css';
 
 type FightComponentProps = {
   onFight: () => void;
+  challengerId: string;
+  championMap: { [key: string]: Champion };
 };
 
-const FightComponent: React.FC<FightComponentProps> = ({ onFight }) => {
+const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerId, championMap }) => {
   const battleMasterImage = 'https://via.placeholder.com/100';
-  const challengerImage = 'https://via.placeholder.com/100';
+  const challengerImage = championMap[challengerId]?.ipfsHash || 'https://via.placeholder.com/100';
 
   return (
     <div className="challenger-dashboard">
