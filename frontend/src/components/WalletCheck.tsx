@@ -39,6 +39,7 @@ const WalletCheck: React.FC<{ onWalletConnected: () => void }> = ({ onWalletConn
 
   return (
     <div>
+      <p>{walletConnected ? 'Wallet is connected' : 'Wallet is not connected'}</p>
       {walletConnected ? (
         <p>Wallet connected</p>
       ) : (
