@@ -31,10 +31,10 @@ const App: React.FC = () => {
 
     try {
       const contract = await getContract();
-      const challenger = await contract.getChallenger(address);
-      if (challenger) {
+      const [challengerId, fightRecords] = await contract.getChallenger(address);
+      if (challengerId) {
         setIsRegisteredChallenger(true);
-        setChallengerId(challenger.currentChampionId.toString());
+        setChallengerId(challengerId.toString());
       } else {
         setIsRegisteredChallenger(false);
       }
