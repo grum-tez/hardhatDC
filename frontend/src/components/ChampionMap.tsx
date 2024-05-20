@@ -6,6 +6,7 @@ interface Champion {
   name: string;
   strength: string; // Store strength as a string for display
   hidden: boolean;
+  ipfsHash: string;
 }
 
 const ChampionMap: React.FC = () => {
@@ -25,6 +26,7 @@ const ChampionMap: React.FC = () => {
             name: champion.name,
             strength: champion.strength.toString(),
             hidden: champion.hidden,
+            ipfsHash: champion.ipfsHash,
           };
         }
 
@@ -47,6 +49,7 @@ const ChampionMap: React.FC = () => {
             <strong>Name:</strong> {champion.name} <br />
             <strong>Strength:</strong> {champion.strength} <br />
             <strong>Hidden:</strong> {champion.hidden.toString()} <br />
+            <strong>IPFS Hash:</strong> {champion.ipfsHash} <br />
           </li>
         ))}
       </ul>

@@ -4,6 +4,7 @@ interface Champion {
   name: string;
   strength: string;
   hidden: boolean;
+  ipfsHash: string;
 }
 
 export const fetchChampionMap = async (): Promise<{ [key: string]: Champion }> => {
@@ -20,6 +21,7 @@ export const fetchChampionMap = async (): Promise<{ [key: string]: Champion }> =
         name: champion.name,
         strength: champion.strength.toString(),
         hidden: champion.hidden,
+        ipfsHash: champion.ipfsHash,
       };
     }
   } catch (error) {
