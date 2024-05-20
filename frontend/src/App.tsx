@@ -118,21 +118,19 @@ const App: React.FC = () => {
     <div>
       <p>{walletConnected ? `Wallet is connected: ${userAddress}` : 'Wallet is not connected'}</p>
       {walletConnected ? (
-        <p>{isRegisteredChallenger ? 'Registered as challenger' : 'Not registered as challenger'}</p>
-        <>
+        <div>
+          <p>{isRegisteredChallenger ? 'Registered as challenger' : 'Not registered as challenger'}</p>
           {!isRegisteredChallenger ? (
-            <>
-              <ChampionSelection
-                onSelect={handleSelectChampion}
-                onBecomeChallenger={becomeChallenger}
-                selectedChampionId={selectedChampionId}
-                championMap={championMap}
-              />
-            </>
+            <ChampionSelection
+              onSelect={handleSelectChampion}
+              onBecomeChallenger={becomeChallenger}
+              selectedChampionId={selectedChampionId}
+              championMap={championMap}
+            />
           ) : (
             <ChallengerDashboard challengerId={challengerId} onFight={challengeBattleMaster} />
           )}
-        </>
+        </div>
       ) : (
         <WalletCheck onWalletConnected={handleWalletConnected} />
       )}
