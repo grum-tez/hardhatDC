@@ -31,10 +31,11 @@ const App: React.FC = () => {
 
     try {
       const contract = await getContract();
-      const currentChampionId = await contract.challengerMap(address);
+      const challengerData = await contract.getChallenger(address);
+      const currentChampionId = challengerData.currentChampionId;
+      const fightRecords = challengerData.fightRecords;
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
-        setChallengerId(currentChampionId.toString());
       } else {
         setIsRegisteredChallenger(false);
       }
@@ -45,7 +46,6 @@ const App: React.FC = () => {
   };
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
-  const [challengerId, setChallengerId] = useState<string>('');
   const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
@@ -90,7 +90,6 @@ const App: React.FC = () => {
       const contract = await getContract();
       const tx = await contract.registerAsChallenger(selectedChampionId);
       await tx.wait();
-      setChallengerId(selectedChampionId);
       setMessage('Registered as challenger successfully!');
       setLoading(false);
     } catch (error) {
@@ -133,7 +132,11 @@ const App: React.FC = () => {
               championMap={championMap}
             />
           ) : (
-            <ChallengerDashboard challengerAddress={userAddress} onFight={challengeBattleMaster} championMap={championMap} />
+            <ChallengerDashboard
+              challengerAddress={userAddress}
+              onFight={challengeBattleMaster}
+              championMap={championMap}
+            />
           )}
         </div>
       ) : (
