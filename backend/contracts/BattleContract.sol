@@ -9,6 +9,7 @@ contract BattleContract {
         string name;
         uint strength;
         bool hidden;
+        string ipfsHash;
     }
     struct FightRecord {
         uint256 fightTimestamp;
@@ -27,13 +28,13 @@ contract BattleContract {
 
     constructor(uint _battleMasterChampionId) {
         battle_master_champion_id = _battleMasterChampionId;
-        championMap[1] = Champion("gnat", 1, false);
-        championMap[2] = Champion("mouse", 4, false);
-        championMap[3] = Champion("termite", 2, false);
-        championMap[4] = Champion("skunk", 3, false);
-        championMap[5] = Champion("sloth", 10, false);
-        championMap[6] = Champion("dragon", 1000, true);
-        championMap[7] = Champion("nano-bots", 100000, true);
+        championMap[1] = Champion("gnat", 1, false, "QmWAKjX1LUnb3v2jQJ3Zd9Gu32tFAewwtjZuABfczs6Mj2");
+        championMap[2] = Champion("mouse", 4, false, "QmbpMjbgsFMaLVmtgJf1AdXRXwppJmuG5NGU44Bp9jqsKd");
+        championMap[3] = Champion("termite", 2, false, "QmRdCMxLtUCRNtiwpLsePFZ6QAAiZPtNxDUMUsvZuxoXeC");
+        championMap[4] = Champion("skunk", 3, false, "QmNt7Xet8oLebiPeRTZCp4qF3CjhWG4itgpw9ZJmpywGz3");
+        championMap[5] = Champion("sloth", 10, false, "QmSXByNYCu3VoF2Q6m9Gy8xugp7Va4XsuUvSMaMSjUD1ou");
+        championMap[6] = Champion("dragon", 1000, true, "QmPPW2Rg1GYoBbXbMbsh3Mk6m9BagdiVjcRpoLyxDkkFbc");
+        championMap[7] = Champion("nano-bots", 100000, true, "QmNutTRBNYoqCCmXCD1xkvQqNhY5DZBupcqUJhxSV3uHK1");
     }
 
     function registerAsChallenger(uint _championId) public {
