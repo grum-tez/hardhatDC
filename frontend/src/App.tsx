@@ -20,10 +20,28 @@ const App: React.FC = () => {
   const handleWalletConnected = (address: string) => {
     setUserAddress(address);
     setWalletConnected(true);
+    checkIfRegisteredChallenger(address);
+  };
+
+  const checkIfRegisteredChallenger = async (address: string) => {
+    try {
+      const contract = await getContract();
+      const challenger = await contract.challengerMap(address);
+      if (challenger.currentChampionId) {
+        setIsRegisteredChallenger(true);
+        setChallengerId(challenger.currentChampionId.toString());
+      } else {
+        setIsRegisteredChallenger(false);
+      }
+    } catch (error) {
+      console.error('Error checking if registered challenger:', error);
+      setIsRegisteredChallenger(false);
+    }
   };
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
   const [challengerId, setChallengerId] = useState<string>('');
+  const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
@@ -47,7 +65,10 @@ const App: React.FC = () => {
 
     fetchBattleMasterChampionId();
     fetchMap();
-  }, []);
+    if (walletConnected) {
+      checkIfRegisteredChallenger(userAddress);
+    }
+  }, [walletConnected, userAddress]);
 
   const handleSelectChampion = (id: string) => {
     setSelectedChampionId(id);
@@ -98,7 +119,7 @@ const App: React.FC = () => {
       <p>{walletConnected ? `Wallet is connected: ${userAddress}` : 'Wallet is not connected'}</p>
       {walletConnected ? (
         <>
-          {!challengerId ? (
+          {!isRegisteredChallenger ? (
             <>
               <ChampionSelection
                 onSelect={handleSelectChampion}
