@@ -4,14 +4,14 @@ import FightComponent from './FightComponent';
 import './ChallengerDashboard.css';
 
 type ChallengerDashboardProps = {
-  challengerId: string;
+  challengerAddress: string;
   onFight: () => void;
 };
 
-const ChallengerDashboard: React.FC<ChallengerDashboardProps> = ({ challengerId, onFight }) => {
+const ChallengerDashboard: React.FC<ChallengerDashboardProps> = ({ challengerAddress, onFight }) => {
   return (
     <div>
-      <FightComponent challengerId={challengerId} onFight={onFight} />
+      <FightComponent onFight={onFight} />
     </div>
   );
 };

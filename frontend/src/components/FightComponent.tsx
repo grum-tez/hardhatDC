@@ -2,17 +2,15 @@ import React from 'react';
 import './ChallengerDashboard.css';
 
 type FightComponentProps = {
-  challengerId: string;
   onFight: () => void;
 };
 
-const FightComponent: React.FC<FightComponentProps> = ({ challengerId, onFight }) => {
+const FightComponent: React.FC<FightComponentProps> = ({ onFight }) => {
   const battleMasterImage = 'https://via.placeholder.com/100';
   const challengerImage = 'https://via.placeholder.com/100';
 
   return (
     <div className="challenger-dashboard">
-      <h2>Dashboard for challenger {challengerId}</h2>
       <div className="battle-arena">
         <div className="champion">
           <h3>Your champion</h3>
