@@ -118,6 +118,7 @@ const App: React.FC = () => {
     <div>
       <p>{walletConnected ? `Wallet is connected: ${userAddress}` : 'Wallet is not connected'}</p>
       {walletConnected ? (
+        <p>{isRegisteredChallenger ? 'Registered as challenger' : 'Not registered as challenger'}</p>
         <>
           {!isRegisteredChallenger ? (
             <>
