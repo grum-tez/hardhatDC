@@ -9,7 +9,7 @@ type FightComponentProps = {
 
 const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerId, championMap }) => {
   const battleMasterImage = 'https://via.placeholder.com/100';
-  const challengerImage = championMap[challengerId]?.ipfsHash || 'https://via.placeholder.com/100';
+  const challengerImage = (challengerId && championMap[challengerId]?.ipfsHash) ? championMap[challengerId].ipfsHash : 'https://via.placeholder.com/100';
 
   return (
     <div className="challenger-dashboard">
