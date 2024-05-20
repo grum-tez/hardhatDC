@@ -3,6 +3,7 @@ import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
 import { fetchChampionMap } from './fetchChampionMap';
+import WalletCheck from './components/WalletCheck';
 import './App.css';
 
 interface Champion {
@@ -12,7 +13,12 @@ interface Champion {
 }
 
 const App: React.FC = () => {
+  const [walletConnected, setWalletConnected] = useState<boolean>(false);
   const [battleMasterChampionId, setBattleMasterChampionId] = useState<string | null>(null);
+
+  const handleWalletConnected = () => {
+    setWalletConnected(true);
+  };
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
   const [challengerId, setChallengerId] = useState<string>('');
@@ -87,17 +93,23 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {!challengerId ? (
+      {walletConnected ? (
         <>
-          <ChampionSelection
-            onSelect={handleSelectChampion}
-            onBecomeChallenger={becomeChallenger}
-            selectedChampionId={selectedChampionId}
-            championMap={championMap}
-          />
+          {!challengerId ? (
+            <>
+              <ChampionSelection
+                onSelect={handleSelectChampion}
+                onBecomeChallenger={becomeChallenger}
+                selectedChampionId={selectedChampionId}
+                championMap={championMap}
+              />
+            </>
+          ) : (
+            <ChallengerDashboard challengerId={challengerId} onFight={challengeBattleMaster} />
+          )}
         </>
       ) : (
-        <ChallengerDashboard challengerId={challengerId} onFight={challengeBattleMaster} />
+        <WalletCheck onWalletConnected={handleWalletConnected} />
       )}
       {message && <p>{message}</p>}
     </div>
