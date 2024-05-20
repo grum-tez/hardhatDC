@@ -15,8 +15,10 @@ interface Champion {
 const App: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
   const [battleMasterChampionId, setBattleMasterChampionId] = useState<string | null>(null);
+  const [userAddress, setUserAddress] = useState<string>('');
 
-  const handleWalletConnected = () => {
+  const handleWalletConnected = (address: string) => {
+    setUserAddress(address);
     setWalletConnected(true);
   };
   const [loading, setLoading] = useState<boolean>(true);
@@ -93,7 +95,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <p>{walletConnected ? 'Wallet is connected' : 'Wallet is not connected'}</p>
+      <p>{walletConnected ? `Wallet is connected: ${userAddress}` : 'Wallet is not connected'}</p>
       {walletConnected ? (
         <>
           {!challengerId ? (

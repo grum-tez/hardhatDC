@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const WalletCheck: React.FC<{ onWalletConnected: () => void }> = ({ onWalletConnected }) => {
+const WalletCheck: React.FC<{ onWalletConnected: (address: string) => void }> = ({ onWalletConnected }) => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const WalletCheck: React.FC<{ onWalletConnected: () => void }> = ({ onWalletConn
           const accounts = await window.ethereum.request({ method: 'eth_accounts' });
           if (accounts.length > 0) {
             setWalletConnected(true);
-            onWalletConnected();
+            onWalletConnected(accounts[0]);
           }
         } catch (error) {
           console.error('Error checking wallet connection:', error);
@@ -27,7 +27,7 @@ const WalletCheck: React.FC<{ onWalletConnected: () => void }> = ({ onWalletConn
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if (accounts.length > 0) {
           setWalletConnected(true);
-          onWalletConnected();
+          onWalletConnected(accounts[0]);
         }
       } catch (error) {
         console.error('Error connecting wallet:', error);
