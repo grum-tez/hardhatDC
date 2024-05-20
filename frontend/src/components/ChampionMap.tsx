@@ -18,7 +18,6 @@ const ChampionMap: React.FC = () => {
         const contract = await getContract();
         const champions: { [key: string]: Champion } = {};
 
-        // Hard code the range of champion IDs from 1 to 7
         for (let i = 1; i <= 7; i++) {
           const id = i.toString();
           const champion = await contract.championMap(i);
