@@ -6,17 +6,7 @@ type ChampionSelectionProps = {
   onSelect: (id: string) => void;
   onBecomeChallenger: () => void;
   selectedChampionId: string;
-  championMap: { [key: string]: { name: string; strength: string; hidden: boolean } };
-};
-
-const ipfsHashes: { [key: string]: string } = {
-  "sloth": "QmSXByNYCu3VoF2Q6m9Gy8xugp7Va4XsuUvSMaMSjUD1ou",
-  "mouse": "QmbpMjbgsFMaLVmtgJf1AdXRXwppJmuG5NGU44Bp9jqsKd",
-  "termite": "QmRdCMxLtUCRNtiwpLsePFZ6QAAiZPtNxDUMUsvZuxoXeC",
-  "skunk": "QmNt7Xet8oLebiPeRTZCp4qF3CjhWG4itgpw9ZJmpywGz3",
-  "gnat": "QmWAKjX1LUnb3v2jQJ3Zd9Gu32tFAewwtjZuABfczs6Mj2",
-  "nanobots": "QmNutTRBNYoqCCmXCD1xkvQqNhY5DZBupcqUJhxSV3uHK1",
-  "dragon": "QmPPW2Rg1GYoBbXbMbsh3Mk6m9BagdiVjcRpoLyxDkkFbc"
+  championMap: { [key: string]: { name: string; strength: string; hidden: boolean; ipfsHash: string } };
 };
 
 const ChampionSelection: React.FC<ChampionSelectionProps> = ({
@@ -53,7 +43,7 @@ const ChampionSelection: React.FC<ChampionSelectionProps> = ({
             className={`champion ${selectedChampionId === champion.id ? 'selected' : ''}`}
             onClick={() => onSelect(champion.id)}
           >
-            <img src={`https://ipfs.io/ipfs/${ipfsHashes[champion.name.toLowerCase()]}`} alt={champion.name} />
+            <img src={`https://ipfs.io/ipfs/${championMap[champion.id].ipfsHash}`} alt={champion.name} />
             <p>{champion.name}</p>
           </div>
         ))}
