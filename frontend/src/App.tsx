@@ -24,10 +24,15 @@ const App: React.FC = () => {
   };
 
   const checkIfRegisteredChallenger = async (address: string) => {
+    if (!address) {
+      setIsRegisteredChallenger(false);
+      return;
+    }
+
     try {
       const contract = await getContract();
-      const challenger = await contract.challengerMap(address);
-      if (challenger.currentChampionId) {
+      const challenger = await contract.getChallenger(address);
+      if (challenger) {
         setIsRegisteredChallenger(true);
         setChallengerId(challenger.currentChampionId.toString());
       } else {
