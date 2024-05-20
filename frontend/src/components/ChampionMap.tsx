@@ -50,6 +50,8 @@ const ChampionMap: React.FC = () => {
             <strong>Strength:</strong> {champion.strength} <br />
             <strong>Hidden:</strong> {champion.hidden.toString()} <br />
             <strong>IPFS Hash:</strong> {champion.ipfsHash} <br />
+            <strong>IPFS Hash:</strong> {champion.ipfsHash} <br />
+            <img src={`https://ipfs.io/ipfs/${champion.ipfsHash}`} alt={`${champion.name} image`} />
           </li>
         ))}
       </ul>
