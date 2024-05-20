@@ -9,7 +9,7 @@ module.exports = buildModule("BattleModule", (m) => {
   const battleMasterChampionId = m.getParameter("battleMasterChampionId", DEFAULT_BATTLE_MASTER_CHAMPION_ID);
 
   // Deploy the BattleContract with the specified battle master champion ID
-  const battleContract = m.contract("BattleContract", [battleMasterChampionId]);
+  const battleContract = m.contract("BattleContract1", [battleMasterChampionId]);
 
   // Return the contract as a part of the module
   return { battleContract };

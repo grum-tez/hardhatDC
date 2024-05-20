@@ -1,5 +1,5 @@
 {
-    "address": "0x0b819fC58de32F7D6708079C2c540f551761170f",
+    "address": "0x68B1A6D2A18b3D6e8FffdD4212E70d6800DC6fFd",
     "abi": [
       {
         "inputs": [
@@ -75,6 +75,11 @@
             "internalType": "bool",
             "name": "hidden",
             "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "ipfsHash",
+            "type": "string"
           }
         ],
         "stateMutability": "view",
@@ -118,7 +123,7 @@
                 "type": "string"
               }
             ],
-            "internalType": "struct BattleContract.FightRecord[]",
+            "internalType": "struct BattleContract1.FightRecord[]",
             "name": "",
             "type": "tuple[]"
           }
@@ -159,4 +164,3 @@
       }
     ]
   }
-  

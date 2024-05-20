@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-contract BattleContract {
+contract BattleContract1 {
     // Storage variable to hold the battle master champion ID
     uint256 public battle_master_champion_id;
     
