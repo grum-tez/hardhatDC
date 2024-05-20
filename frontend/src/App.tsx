@@ -31,10 +31,10 @@ const App: React.FC = () => {
 
     try {
       const contract = await getContract();
-      const [challengerId, fightRecords] = await contract.getChallenger(address);
-      if (challengerId) {
+      const currentChampionId = await contract.challengerMap(address);
+      if (currentChampionId) {
         setIsRegisteredChallenger(true);
-        setChallengerId(challengerId.toString());
+        setChallengerId(currentChampionId.toString());
       } else {
         setIsRegisteredChallenger(false);
       }
@@ -133,7 +133,7 @@ const App: React.FC = () => {
               championMap={championMap}
             />
           ) : (
-            <ChallengerDashboard challengerId={challengerId} onFight={challengeBattleMaster} championMap={championMap} />
+            <ChallengerDashboard challengerAddress={userAddress} onFight={challengeBattleMaster} championMap={championMap} />
           )}
         </div>
       ) : (
