@@ -1,10 +1,16 @@
-// src/App.tsx
 import React, { useState, useEffect } from 'react';
 import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
 import ChampionMap from './components/ChampionMap';
+import { fetchChampionMap } from './fetchChampionMap';
 import './App.css';
+
+interface Champion {
+  name: string;
+  strength: string;
+  hidden: boolean;
+}
 
 const App: React.FC = () => {
   const [battleMasterChampionId, setBattleMasterChampionId] = useState<string | null>(null);
@@ -12,6 +18,7 @@ const App: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [challengerId, setChallengerId] = useState<string>('');
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
+  const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
   useEffect(() => {
     const fetchBattleMasterChampionId = async () => {
@@ -26,7 +33,13 @@ const App: React.FC = () => {
       }
     };
 
+    const fetchMap = async () => {
+      const champions = await fetchChampionMap();
+      setChampionMap(champions);
+    };
+
     fetchBattleMasterChampionId();
+    fetchMap();
   }, []);
 
   const handleSelectChampion = (id: string) => {
@@ -81,6 +94,7 @@ const App: React.FC = () => {
             onSelect={handleSelectChampion}
             onBecomeChallenger={becomeChallenger}
             selectedChampionId={selectedChampionId}
+            championMap={championMap}
           />
           <ChampionMap />
         </>
