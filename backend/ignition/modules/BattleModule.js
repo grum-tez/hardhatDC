@@ -33,6 +33,9 @@ async function saveContractDetails(contract) {
 
   // Write the ABI and address to the file
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+
+  // Log the successful save
+  console.log(`Contract details saved to ${filePath}`);
 }
 
 // Export a function to be called after the deployment
@@ -41,7 +44,9 @@ module.exports.postDeploy = async function ({ deployments }) {
 
   if (battleContract) {
     await saveContractDetails(battleContract);
+    console.log('Deployment of BattleContract successful.');
   } else {
     console.error('Deployment of BattleContract failed.');
+    console.log('Deployment of BattleContract failed.');
   }
 };
