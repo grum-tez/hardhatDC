@@ -3,15 +3,10 @@ import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
 import FightComponent from './components/FightComponent';
-import { fetchChampionMap } from './fetchChampionMap';
+import { fetchChampionMap, Champion } from './fetchChampionMap';
 import WalletCheck from './components/WalletCheck';
 import './App.css';
 
-interface Champion {
-  name: string;
-  strength: string;
-  hidden: boolean;
-}
 
 const App: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);

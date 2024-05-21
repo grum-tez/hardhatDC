@@ -1,5 +1,12 @@
 import { getContract } from './contractService';
 
+export interface Champion {
+  name: string;
+  strength: string;
+  hidden: boolean;
+  ipfsHash: string;
+}
+
 interface Champion {
   name: string;
   strength: string;
