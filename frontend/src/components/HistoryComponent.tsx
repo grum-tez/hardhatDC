@@ -1,9 +1,22 @@
 import React from 'react';
 
-const HistoryComponent: React.FC = () => {
+type HistoryComponentProps = {
+  fightRecords: any[];
+};
+
+const HistoryComponent: React.FC<HistoryComponentProps> = ({ fightRecords }) => {
   return (
     <div>
-      this is the history component
+      <h2>Fight History</h2>
+      {fightRecords.length > 0 ? (
+        <ul>
+          {fightRecords.map((record, index) => (
+            <li key={index}>{JSON.stringify(record)}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No fight records available.</p>
+      )}
     </div>
   );
 };

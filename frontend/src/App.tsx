@@ -140,6 +140,13 @@ const App: React.FC = () => {
               onFight={challengeBattleMaster}
               currentChampionId={currentChampionId}
               championMap={championMap}
+              fightRecords={fightRecords}
+            />
+            <ChallengerDashboard
+              challengerAddress={userAddress}
+              onFight={challengeBattleMaster}
+              currentChampionId={currentChampionId}
+              championMap={championMap}
             />
           )}
         </div>
