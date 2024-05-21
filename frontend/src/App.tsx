@@ -36,7 +36,9 @@ const App: React.FC = () => {
       const fightRecords = challengerData.fightRecords;
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
+        setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId}`);
       } else {
+        setMessage(`Not registered as challenger. Current Champion ID: ${currentChampionId}`);
         setIsRegisteredChallenger(false);
       }
     } catch (error) {
@@ -123,7 +125,7 @@ const App: React.FC = () => {
       <p>{walletConnected ? `Wallet is connected: ${userAddress}` : 'Wallet is not connected'}</p>
       {walletConnected ? (
         <div>
-          <p>{isRegisteredChallenger ? 'Registered as challenger' : 'Not registered as challenger'}</p>
+          <p>{isRegisteredChallenger ? `Registered as challenger. Current Champion ID: ${currentChampionId}` : `Not registered as challenger. Current Champion ID: ${currentChampionId}`}</p>
           {!isRegisteredChallenger ? (
             <ChampionSelection
               onSelect={handleSelectChampion}
