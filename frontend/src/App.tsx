@@ -33,14 +33,16 @@ const App: React.FC = () => {
       const contract = await getContract();
       const challengerData = await contract.getChallenger(address);
       const currentChampionId = challengerData.currentChampionId;
+      console.log('Challenger Data:', challengerData);
+      console.log('Current Champion ID:', currentChampionId);
       const fightRecords = challengerData.fightRecords;
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
-        setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId}`);
+        setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
         setCurrentChampionId(currentChampionId);
       } else {
         setCurrentChampionId(currentChampionId);
-        setMessage(`Not registered as challenger. Current Champion ID: ${currentChampionId}`);
+        setMessage(`Not registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
         setIsRegisteredChallenger(false);
       }
     } catch (error) {
