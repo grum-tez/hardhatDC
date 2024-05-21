@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
-import FightComponent from './components/FightComponent';
 import { fetchChampionMap, Champion } from './fetchChampionMap';
 import WalletCheck from './components/WalletCheck';
 import './App.css';
