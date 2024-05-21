@@ -20,6 +20,10 @@ function runCommand(command, options = {}) {
 
     process.stdout.pipe(process.stdout);
     process.stderr.pipe(process.stderr);
+
+    process.on('error', (err) => {
+      reject(err);
+    });
   });
 }
 
