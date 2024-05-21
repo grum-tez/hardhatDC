@@ -1,6 +1,7 @@
 import React from 'react';
 import './ChallengerDashboard.css';
 import { Champion } from '../fetchChampionMap';
+import { Champion } from '../fetchChampionMap';
 
 type FightComponentProps = {
   onFight: () => void;
@@ -30,6 +31,7 @@ const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerAddr
           <img src={battleMasterImage} alt="The Battlemaster" />
         </div>
       </div>
+      <pre>champion map goes here: {JSON.stringify(championMap, null, 2)}</pre>
       <pre>champion map goes here: {JSON.stringify(championMap, null, 2)}</pre>
       <button className="fight-button" onClick={onFight}>
         Fight
