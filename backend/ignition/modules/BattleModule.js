@@ -18,6 +18,8 @@ module.exports = buildModule("BattleModule", (m) => {
 // Define a post-deployment hook to save the ABI and address
 async function saveContractDetails(contract) {
   console.log('saveContractDetails function called.');
+  console.log('Contract address:', contract.address);
+  console.log('Contract interface:', contract.interface);
   const contractAddress = contract.address;
   const contractABI = JSON.parse(contract.interface.format('json'));
 
@@ -42,6 +44,7 @@ async function saveContractDetails(contract) {
 // Export a function to be called after the deployment
 module.exports.postDeploy = async function ({ deployments }) {
   console.log('postDeploy function called.');
+  console.log('Deployments object:', deployments);
 
   const battleContract = deployments.BattleContract1;
   console.log('BattleContract deployment details:', battleContract);
