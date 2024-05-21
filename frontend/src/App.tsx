@@ -33,7 +33,10 @@ const App: React.FC = () => {
       const contract = await getContract();
       const challengerData = await contract.getChallenger(address);
       const currentChampionId = challengerData[1].currentChampionId;
-      console.log('Challenger Data:', JSON.stringify(challengerData, null, 2));
+      const challengerDataString = JSON.stringify(challengerData, (key, value) =>
+        typeof value === 'bigint' ? value.toString() : value
+      );
+      console.log('Challenger Data:', challengerDataString);
       console.log('Current Champion ID:', currentChampionId);
       const fightRecords = challengerData.fightRecords;
       if (currentChampionId) {
