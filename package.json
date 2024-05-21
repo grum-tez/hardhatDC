@@ -10,7 +10,8 @@
         "build": "yarn workspace frontend build",
         "test": "yarn workspace backend test",
         "deploy:contracts": "yarn workspace backend hardhat run scripts/deploy.js",
-        "deploy:local": "yarn workspace backend deployLocal"
+        "deploy:local": "yarn workspace backend deployLocal",
+        "deploy:update-frontend": "node scripts/deployAndUpdateFrontend.js"
       }
   }
   
