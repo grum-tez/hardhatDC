@@ -23,13 +23,5 @@ const ChallengerDashboard: React.FC<ChallengerDashboardProps> = ({ challengerAdd
   );
 };
 
-const ChallengerDashboard: React.FC<ChallengerDashboardProps> = ({ challengerAddress, onFight, currentChampionId, championMap }) => {
-  return (
-    <div>
-      <HistoryComponent />
-      <FightComponent onFight={onFight} currentChampionId={currentChampionId} championMap={championMap} />
-    </div>
-  );
-};
 
 export default ChallengerDashboard;
