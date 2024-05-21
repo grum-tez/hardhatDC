@@ -32,8 +32,6 @@ const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerAddr
           <img src={battleMasterImage} alt="The Battlemaster" style={{ width: '2ok00px', height: '200px' }} />
         </div>
       </div>
-      <pre>champion map goes here: {JSON.stringify(championMap, null, 2)}</pre>
-      <pre>champion map goes here: {JSON.stringify(championMap, null, 2)}</pre>
       <button className="fight-button" onClick={onFight}>
         Fight
       </button>
