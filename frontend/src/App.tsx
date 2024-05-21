@@ -31,7 +31,7 @@ const App: React.FC = () => {
       const challengerDataString = JSON.stringify(challengerData, (key, value) =>
         typeof value === 'bigint' ? value.toString() : value
       );
-      const fightRecords = challengerData[1];
+      setFightRecords(challengerData[1]);
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
         setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
@@ -51,6 +51,7 @@ const App: React.FC = () => {
   const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
   const [currentChampionId, setCurrentChampionId] = useState<string | null>(null);
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
+  const [fightRecords, setFightRecords] = useState<any[]>([]);
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
   useEffect(() => {
