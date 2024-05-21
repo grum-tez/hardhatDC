@@ -10,7 +10,9 @@ type FightComponentProps = {
 };
 
 const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerAddress, championMap, currentChampionId }) => {
-  const battleMasterImage = 'https://via.placeholder.com/100';
+  const battleMasterImage = championMap['6']?.ipfsHash
+    ? `https://ipfs.io/ipfs/${championMap['6'].ipfsHash}`
+    : 'https://via.placeholder.com/100';
   const challengerImage = currentChampionId && championMap[currentChampionId]?.ipfsHash
     ? `https://ipfs.io/ipfs/${championMap[currentChampionId].ipfsHash}`
     : 'https://via.placeholder.com/100';
