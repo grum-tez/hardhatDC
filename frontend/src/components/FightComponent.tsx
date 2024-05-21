@@ -29,7 +29,7 @@ const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerAddr
         </div>
         <div className="battle-master">
           <h3>THE BATTLEMASTER</h3>
-          <img src={battleMasterImage} alt="The Battlemaster" style={{ width: '200px', height: '200px' }} />
+          <img src={battleMasterImage} alt="The Battlemaster" style={{ width: '2ok00px', height: '200px' }} />
         </div>
       </div>
       <pre>champion map goes here: {JSON.stringify(championMap, null, 2)}</pre>
