@@ -55,3 +55,26 @@ module.exports.postDeploy = async function ({ deployments }) {
     console.log('Deployment of BattleContract failed.');
   }
 };
+
+async function saveContractDetails(contract) {
+  console.log('saveContractDetails function called.');
+  const contractAddress = contract.address;
+  const contractABI = JSON.parse(contract.interface.format('json'));
+
+  const data = {
+    address: contractAddress,
+    abi: contractABI
+  };
+
+  // Define the path where the ABI and address will be saved
+  const filePath = path.join(__dirname, '../../frontend/src/contracts/BattleContract.json');
+
+  // Ensure the directory exists
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+  // Write the ABI and address to the file
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+
+  // Log the successful save
+  console.log(`Contract details saved to ${filePath}`);
+}
