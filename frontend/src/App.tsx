@@ -31,8 +31,6 @@ const App: React.FC = () => {
       const challengerDataString = JSON.stringify(challengerData, (key, value) =>
         typeof value === 'bigint' ? value.toString() : value
       );
-      console.log('Challenger Data:', challengerDataString);
-      console.log('Current Champion ID:', currentChampionId);
       const fightRecords = challengerData[1];
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
