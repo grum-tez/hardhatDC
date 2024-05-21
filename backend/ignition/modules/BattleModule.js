@@ -42,7 +42,7 @@ async function saveContractDetails(contract) {
 module.exports.postDeploy = async function ({ deployments }) {
   console.log('postDeploy function called.');
 
-  const battleContract = deployments.BattleContract;
+  const battleContract = deployments.BattleContract1;
   console.log('BattleContract deployment details:', battleContract);
 
   if (battleContract) {
