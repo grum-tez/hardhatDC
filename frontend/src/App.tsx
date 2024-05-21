@@ -32,13 +32,13 @@ const App: React.FC = () => {
     try {
       const contract = await getContract();
       const challengerData = await contract.getChallenger(address);
-      const currentChampionId = challengerData[1].currentChampionId;
+      const currentChampionId = challengerData[0];
       const challengerDataString = JSON.stringify(challengerData, (key, value) =>
         typeof value === 'bigint' ? value.toString() : value
       );
       console.log('Challenger Data:', challengerDataString);
       console.log('Current Champion ID:', currentChampionId);
-      const fightRecords = challengerData.fightRecords;
+      const fightRecords = challengerData[1];
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
         setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
