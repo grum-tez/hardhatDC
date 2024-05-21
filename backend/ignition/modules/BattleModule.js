@@ -40,10 +40,15 @@ async function saveContractDetails(contract) {
 
 // Export a function to be called after the deployment
 module.exports.postDeploy = async function ({ deployments }) {
+  console.log('postDeploy function called.');
+
   const battleContract = deployments.BattleContract;
+  console.log('BattleContract deployment details:', battleContract);
 
   if (battleContract) {
+    console.log('Calling saveContractDetails function.');
     await saveContractDetails(battleContract);
+    console.log('saveContractDetails function executed.');
     console.log('Deployment of BattleContract successful.');
   } else {
     console.error('Deployment of BattleContract failed.');
