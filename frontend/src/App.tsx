@@ -37,7 +37,9 @@ const App: React.FC = () => {
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
         setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId}`);
+        setCurrentChampionId(currentChampionId);
       } else {
+        setCurrentChampionId(currentChampionId);
         setMessage(`Not registered as challenger. Current Champion ID: ${currentChampionId}`);
         setIsRegisteredChallenger(false);
       }
@@ -49,6 +51,7 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
   const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
+  const [currentChampionId, setCurrentChampionId] = useState<string | null>(null);
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
