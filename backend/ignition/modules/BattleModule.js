@@ -4,7 +4,7 @@ console.log('BattleModule is being executed.');
 const fs = require('fs');
 const path = require('path');
 
-module.exports = buildModule("BattleModule", (m) => {
+const battleModule = buildModule("BattleModule", (m) => {
   const DEFAULT_BATTLE_MASTER_CHAMPION_ID = 6;
 
   // Define the parameter for the battle master champion ID with a default value
@@ -16,6 +16,8 @@ module.exports = buildModule("BattleModule", (m) => {
   // Return the contract as a part of the module
   return { battleContract };
 });
+
+module.exports = battleModule;
 
 // Define a post-deployment hook to save the ABI and address
 async function saveContractDetails(contract) {
@@ -44,8 +46,8 @@ async function saveContractDetails(contract) {
 }
 
 // Export a function to be called after the deployment
-module.exports.postDeploy = async function ({ deployments }) {
-  console.log('postDeploy function called.');
+battleModule.postDeploy = async function ({ deployments }) {
+  console.log('postDeploy function called at the beginning.');
   console.log('Deployments object:', deployments);
 
   const battleContract = deployments.BattleContract1;
