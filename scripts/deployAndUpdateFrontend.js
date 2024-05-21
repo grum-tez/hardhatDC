@@ -25,11 +25,7 @@ function runCommand(command, options = {}) {
 
 async function main() {
   try {
-    // Step 1: Run Hardhat node
-    console.log('Starting Hardhat node...');
-    await runCommand('npx hardhat node', { cwd: backendDir });
-
-    // Step 2: Deploy contracts locally
+    // Step 1: Deploy contracts locally
     console.log('Deploying contracts locally...');
     await runCommand('yarn deployLocal', { cwd: backendDir });
 
