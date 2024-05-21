@@ -31,7 +31,7 @@ async function main() {
   try {
     // Step 1: Deploy contracts locally
     console.log('Deploying contracts locally...');
-    await runCommand('yarn deployLocal', { cwd: backendDir });
+    await runCommand('yarn deploy:local', { cwd: backendDir });
 
     // Step 3: Update frontend contract file
     console.log('Updating frontend contract file...');
