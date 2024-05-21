@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
+import FightComponent from './components/FightComponent';
 import { fetchChampionMap } from './fetchChampionMap';
 import WalletCheck from './components/WalletCheck';
 import './App.css';
@@ -145,6 +146,7 @@ const App: React.FC = () => {
             <ChallengerDashboard
               challengerAddress={userAddress}
               onFight={challengeBattleMaster}
+              currentChampionId={currentChampionId}
               championMap={championMap}
             />
           )}
