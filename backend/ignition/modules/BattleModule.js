@@ -1,4 +1,6 @@
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
+
+console.log('BattleModule is being executed.');
 const fs = require('fs');
 const path = require('path');
 
@@ -47,6 +49,7 @@ module.exports.postDeploy = async function ({ deployments }) {
   console.log('Deployments object:', deployments);
 
   const battleContract = deployments.BattleContract1;
+  console.log('BattleContract1 deployment details:', battleContract);
   console.log('BattleContract deployment details:', battleContract);
 
   if (battleContract) {
