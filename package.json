@@ -11,7 +11,7 @@
         "test": "yarn workspace backend test",
         "deploy:contracts": "yarn workspace backend hardhat run scripts/deploy.js",
         "deploy:local": "yarn workspace backend deployLocal",
-        "deploy:update-frontend": "node scripts/deployAndUpdateFrontend.js"
+        "deploy:update-frontend": "yarn deploy:local && node scripts/deployAndUpdateFrontend.js"
       }
   }
   

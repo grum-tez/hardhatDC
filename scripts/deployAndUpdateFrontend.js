@@ -1,4 +1,3 @@
-const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -8,31 +7,8 @@ const battleContractArtifactPath = path.join(backendDir, 'ignition/deployments/c
 const deployedAddressesPath = path.join(backendDir, 'ignition/deployments/chain-31337/deployed_addresses.json');
 const frontendContractPath = path.join(frontendDir, 'src/contracts/BattleContract.json');
 
-function runCommand(command, options = {}) {
-  return new Promise((resolve, reject) => {
-    const process = exec(command, options, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(stdout);
-      }
-    });
-
-    process.stdout.pipe(process.stdout);
-    process.stderr.pipe(process.stderr);
-
-    process.on('error', (err) => {
-      reject(err);
-    });
-  });
-}
-
 async function main() {
   try {
-    // Step 1: Deploy contracts locally
-    console.log('Deploying contracts locally...');
-    await runCommand('yarn deploy:local', { cwd: backendDir });
-
     // Step 3: Update frontend contract file
     console.log('Updating frontend contract file...');
     const battleContractArtifact = JSON.parse(fs.readFileSync(battleContractArtifactPath, 'utf8'));
