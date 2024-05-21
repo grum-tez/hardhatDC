@@ -140,8 +140,6 @@ const App: React.FC = () => {
               onFight={challengeBattleMaster}
               currentChampionId={currentChampionId}
               championMap={championMap}
-              currentChampionId={currentChampionId}
-              championMap={championMap}
             />
           )}
         </div>

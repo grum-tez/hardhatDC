@@ -1,7 +1,6 @@
 import React from 'react';
 import './ChallengerDashboard.css';
 import { Champion } from '../fetchChampionMap';
-import { Champion } from '../fetchChampionMap';
 
 type FightComponentProps = {
   onFight: () => void;
