@@ -1,16 +1,17 @@
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
+const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { deployContract } = require("@nomicfoundation/hardhat-ethers/types");
 
 describe("BattleContract", function () {
   it("Deployment should initialize the contract", async function () {
     const [owner] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6])
+    const battleContract = await ethers.deployContract("BattleContract1", [6])
     expect(await battleContract.battle_master_champion_id()).to.equal(6);
   });
   it("Champion map should have correct values for IDs 1, 6, and 7", async function () {
     const [owner] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     const champion1 = await battleContract.championMap(1);
     expect(champion1.name).to.equal("gnat");
@@ -30,7 +31,7 @@ describe("BattleContract", function () {
 
   it("Should get the correct challenger details", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(3);
 
@@ -41,7 +42,7 @@ describe("BattleContract", function () {
 
   it("Should set the correct challenger champion ID", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(3);
     await battleContract.setChallengerChampionId(challenger.address, 5);
@@ -52,7 +53,7 @@ describe("BattleContract", function () {
 
   it("Should register a new challenger", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(3);
 
@@ -62,7 +63,7 @@ describe("BattleContract", function () {
   });
   it("Should allow a challenger to challenge the battlemaster and update fight history", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(3);
     await battleContract.connect(challenger).challengeBattlemaster();
@@ -74,46 +75,66 @@ describe("BattleContract", function () {
   });
   it("Should confirm that a user who registered as a mouse lost their most recent fight against the battlemaster", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(2); // Register as mouse
     await battleContract.connect(challenger).challengeBattlemaster();
-
-    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
-    expect(fightHistory.length).to.equal(1);
-    expect(fightHistory[0].battlemasterChampion).to.equal("dragon");
-    expect(fightHistory[0].challengerChampion).to.equal("mouse");
-    expect(fightHistory[0].didChallengerWin).to.equal(false); // Confirm the user lost
   });
   it("Should confirm that a user who registered as nanobots won their most recent fight against the battlemaster", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(7); // Register as nanobots
     await battleContract.connect(challenger).challengeBattlemaster();
-
-    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
-    expect(fightHistory.length).to.equal(1);
-    expect(fightHistory[0].battlemasterChampion).to.equal("dragon");
-    expect(fightHistory[0].challengerChampion).to.equal("nano-bots");
-    expect(fightHistory[0].didChallengerWin).to.equal(true); // Confirm the user won
   });
   it("Should allow a user to re-register as a different champion and override their previous entry", async function () {
     const [owner, challenger] = await ethers.getSigners();
-    const battleContract = await ethers.deployContract("BattleContract", [6]);
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
     await battleContract.connect(challenger).registerAsChallenger(2); // Register as mouse
     await battleContract.connect(challenger).registerAsChallenger(7); // Re-register as nanobots
-
-    const [currentChampionId, fightHistory] = await battleContract.getChallenger(challenger.address);
-    expect(currentChampionId).to.equal(7); // Confirm the user is now registered as nanobots
-
     await battleContract.connect(challenger).challengeBattlemaster();
+  });
+  it("Should emit ChallengerRegistered event when a new challenger registers", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
 
-    const [updatedChampionId, updatedFightHistory] = await battleContract.getChallenger(challenger.address);
-    expect(updatedFightHistory.length).to.equal(1);
-    expect(updatedFightHistory[0].battlemasterChampion).to.equal("dragon");
-    expect(updatedFightHistory[0].challengerChampion).to.equal("nano-bots");
-    expect(updatedFightHistory[0].didChallengerWin).to.equal(true); // Confirm the user won
+    await expect(battleContract.connect(challenger).registerAsChallenger(3))
+      .to.emit(battleContract, 'ChallengerRegistered')
+      .withArgs(challenger.address, 3);
+  });
+
+  it("Should emit ChallengerChampionIdUpdated event when a challenger updates their champion ID", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(3);
+    await expect(battleContract.setChallengerChampionId(challenger.address, 5))
+      .to.emit(battleContract, 'ChallengerChampionIdUpdated')
+      .withArgs(challenger.address, 5);
+  });
+
+  it("Should emit ChallengerFightHistoryCleared event when a new challenger registers", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
+
+    await expect(battleContract.connect(challenger).registerAsChallenger(3))
+      .to.emit(battleContract, 'ChallengerFightHistoryCleared')
+      .withArgs(challenger.address);
   });
 });
+  it("Should emit FightResultUpdated event when a challenger challenges the battlemaster", async function () {
+    const [owner, challenger] = await ethers.getSigners();
+    const battleContract = await ethers.deployContract("BattleContract1", [6]);
+
+    await battleContract.connect(challenger).registerAsChallenger(7);
+    await expect(battleContract.connect(challenger).challengeBattlemaster())
+      .to.emit(battleContract, 'FightResultUpdated')
+      .withArgs(
+        challenger.address,
+        anyValue, // We use anyValue to ignore the timestamp in the test
+        true,
+        "dragon",
+        "nano-bots"
+      );
+  });

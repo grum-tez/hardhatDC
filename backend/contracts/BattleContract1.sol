@@ -1,16 +1,16 @@
-//SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
 contract BattleContract1 {
-    // Storage variable to hold the battle master champion ID
     uint256 public battle_master_champion_id;
-    
+
     struct Champion {
         string name;
         uint strength;
         bool hidden;
         string ipfsHash;
     }
+
     struct FightRecord {
         uint256 fightTimestamp;
         bool didChallengerWin;
@@ -22,6 +22,17 @@ contract BattleContract1 {
         uint currentChampionId;
         FightRecord[] fightHistory;
     }
+
+    event ChallengerRegistered(address indexed challenger, uint championId);
+    event ChallengerChampionIdUpdated(address indexed challenger, uint championId);
+    event ChallengerFightHistoryCleared(address indexed challenger);
+    event FightResultUpdated(
+        address indexed challenger,
+        uint256 fightTimestamp,
+        bool didChallengerWin,
+        string battlemasterChampion,
+        string challengerChampion
+    );
 
     mapping(uint => Champion) public championMap;
     mapping(address => Challenger) public challengerMap;
@@ -39,37 +50,42 @@ contract BattleContract1 {
 
     function registerAsChallenger(uint _championId) public {
         Challenger storage newChallenger = challengerMap[msg.sender];
-        newChallenger.currentChampionId = _championId;
-        delete newChallenger.fightHistory; // Ensure the fight history is empty
+        if (newChallenger.currentChampionId != 0) {
+            // If already registered, just update the currentChampionId
+            newChallenger.currentChampionId = _championId;
+            emit ChallengerChampionIdUpdated(msg.sender, _championId);
+        } else {
+            // If not registered, create a new entry
+            newChallenger.currentChampionId = _championId;
+            delete newChallenger.fightHistory; // Ensure the fight history is empty
+            emit ChallengerRegistered(msg.sender, _championId);
+            emit ChallengerFightHistoryCleared(msg.sender);
+        }
     }
 
-    // Getter function for the Challenger struct
     function getChallenger(address _challenger) public view returns (uint, FightRecord[] memory) {
         Challenger storage challenger = challengerMap[_challenger];
         return (challenger.currentChampionId, challenger.fightHistory);
     }
 
-    // Setter function for the Challenger struct
     function setChallengerChampionId(address _challenger, uint _championId) public {
         Challenger storage challenger = challengerMap[_challenger];
         challenger.currentChampionId = _championId;
+        emit ChallengerChampionIdUpdated(_challenger, _championId);
     }   
 
     function challengeBattlemaster() public {
         require(challengerMap[msg.sender].currentChampionId != 0, "Challenger not registered");
 
-        // Retrieve the challenger's champion and the battlemaster's champion
         Challenger storage challengerRecord = challengerMap[msg.sender];
         uint challengerChampionId = challengerRecord.currentChampionId;
         Champion storage challengerChampionRecord = championMap[challengerChampionId];
         Champion storage battlemasterChampionRecord = championMap[battle_master_champion_id];
 
-        // Compare strengths
         uint challengerStrength = challengerChampionRecord.strength;
         uint battlemasterStrength = battlemasterChampionRecord.strength;
         bool didChallengerWin = challengerStrength > battlemasterStrength;
 
-        // Create a fight record
         FightRecord memory fightRecord = FightRecord({
             fightTimestamp: block.timestamp,
             didChallengerWin: didChallengerWin,
@@ -77,7 +93,14 @@ contract BattleContract1 {
             challengerChampion: challengerChampionRecord.name
         });
 
-        // Update the fight history
         challengerRecord.fightHistory.push(fightRecord);
+
+        emit FightResultUpdated(
+            msg.sender,
+            fightRecord.fightTimestamp,
+            fightRecord.didChallengerWin,
+            fightRecord.battlemasterChampion,
+            fightRecord.challengerChampion
+        );
     }
 }

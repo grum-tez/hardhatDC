@@ -1,17 +1,17 @@
 {
-    "name": "BattleMasterDapp",
-    "private": true,
-    "workspaces": [
-      "backend",
-      "frontend"
-    ],
-    "scripts": {
-        "start": "yarn workspace frontend start",
-        "build": "yarn workspace frontend build",
-        "test": "yarn workspace backend test",
-        "deploy:contracts": "yarn workspace backend hardhat run scripts/deploy.js",
-        "deploy:local": "yarn workspace backend deployLocal",
-        "deploy:update-frontend": "yarn deploy:local && node scripts/deployAndUpdateFrontend.js"
-      }
-  }
-  
+  "name": "BattleMasterDapp",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+      "start": "yarn workspace frontend start",
+      "build": "yarn workspace frontend build",
+      "test": "yarn workspace backend test",
+      "deploy:contracts": "yarn workspace backend hardhat run scripts/deploy.js",
+      "deploy:local-no-update": "yarn workspace backend deployLocal",
+      "deploy:local": "yarn deploy:local-no-update && node scripts/deployAndUpdateFrontend.js"
+    }
+}
+

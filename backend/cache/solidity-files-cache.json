@@ -38,8 +38,8 @@
       ]
     },
     "/workspaces/hardhatDC/backend/contracts/BattleContract1.sol": {
-      "lastModificationDate": 1716181931059,
-      "contentHash": "d18446d8c3bcf8dcaeb1a1c8b3676a29",
+      "lastModificationDate": 1716576384473,
+      "contentHash": "c47dbff4a449d3f60ff176d9130ddd9d",
       "sourceName": "contracts/BattleContract1.sol",
       "solcConfig": {
         "version": "0.8.24",
