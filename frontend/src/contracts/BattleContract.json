@@ -1,166 +1,254 @@
 {
-    "address": "0x68B1A6D2A18b3D6e8FffdD4212E70d6800DC6fFd",
-    "abi": [
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_battleMasterChampionId",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
-        "inputs": [],
-        "name": "battle_master_champion_id",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "challengeBattlemaster",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "name": "challengerMap",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "currentChampionId",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "name": "championMap",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "strength",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "hidden",
-            "type": "bool"
-          },
-          {
-            "internalType": "string",
-            "name": "ipfsHash",
-            "type": "string"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "_challenger",
-            "type": "address"
-          }
-        ],
-        "name": "getChallenger",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "fightTimestamp",
-                "type": "uint256"
-              },
-              {
-                "internalType": "bool",
-                "name": "didChallengerWin",
-                "type": "bool"
-              },
-              {
-                "internalType": "string",
-                "name": "battlemasterChampion",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "challengerChampion",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct BattleContract1.FightRecord[]",
-            "name": "",
-            "type": "tuple[]"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_championId",
-            "type": "uint256"
-          }
-        ],
-        "name": "registerAsChallenger",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "_challenger",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_championId",
-            "type": "uint256"
-          }
-        ],
-        "name": "setChallengerChampionId",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      }
-    ]
-  }
+  "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_battleMasterChampionId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "challenger",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "championId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ChallengerChampionIdUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "challenger",
+          "type": "address"
+        }
+      ],
+      "name": "ChallengerFightHistoryCleared",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "challenger",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "championId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ChallengerRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "challenger",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fightTimestamp",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "didChallengerWin",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "battlemasterChampion",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "challengerChampion",
+          "type": "string"
+        }
+      ],
+      "name": "FightResultUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "battle_master_champion_id",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "challengeBattlemaster",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "challengerMap",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "currentChampionId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "championMap",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "strength",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "hidden",
+          "type": "bool"
+        },
+        {
+          "internalType": "string",
+          "name": "ipfsHash",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_challenger",
+          "type": "address"
+        }
+      ],
+      "name": "getChallenger",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "fightTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "didChallengerWin",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "battlemasterChampion",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "challengerChampion",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct BattleContract1.FightRecord[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_championId",
+          "type": "uint256"
+        }
+      ],
+      "name": "registerAsChallenger",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_challenger",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_championId",
+          "type": "uint256"
+        }
+      ],
+      "name": "setChallengerChampionId",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
