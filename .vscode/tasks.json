@@ -16,7 +16,7 @@
         "panel": "dedicated",
         "group": "front_node"
       },
-    },
+    }
     {
       "label": "back_node",
       "type": "shell",
