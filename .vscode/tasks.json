@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Start Frontend",
+      "label": "front_node",
       "type": "shell",
       "command": "yarn dev",
       "group": "build",
@@ -14,13 +14,13 @@
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
-        "group": "frontend node"
+        "group": "front_node"
       }
     },
     {
-      "label": "Start Backend Node",
+      "label": "back_node",
       "type": "shell",
-      "command": "yarn node",
+      "command": "yarn local_node",
       "group": "build",
       "isBackground": true,
       "problemMatcher": [],
@@ -30,7 +30,7 @@
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
-        "group": "backend node"
+        "group": "back_node"
       }
     },
     {
@@ -38,7 +38,7 @@
       "type": "shell",
       "command": "yarn deployLocal",
       "group": "build",
-      "dependsOn": "Start Backend Node",
+      "dependsOn": "back_node",
       "problemMatcher": [],
       "options": {
         "cwd": "${workspaceFolder}/backend"
@@ -46,13 +46,13 @@
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
-        "group": "backend node"
+        "group": "back_node"
       }
     },
     {
       "label": "Start All",
       "dependsOn": [
-        "Start Frontend",
+        "front_node",
         "Deploy Contract Locally"
       ],
       "problemMatcher": [],
