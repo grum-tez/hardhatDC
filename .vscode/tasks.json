@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Frontend",
+      "type": "shell",
+      "command": "yarn dev",
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "frontend node"
+      }
+    },
+    {
+      "label": "Start Backend Node",
+      "type": "shell",
+      "command": "yarn node",
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "backend node"
+      }
+    },
+    {
+      "label": "Deploy Contract Locally",
+      "type": "shell",
+      "command": "yarn deployLocal",
+      "group": "build",
+      "dependsOn": "Start Backend Node",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "backend node"
+      }
+    },
+    {
+      "label": "Start All",
+      "dependsOn": [
+        "Start Frontend",
+        "Deploy Contract Locally"
+      ],
+      "problemMatcher": [],
+      "group": "build"
+    }
+  ]
+}
