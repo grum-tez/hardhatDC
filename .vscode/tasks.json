@@ -2,16 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "terminate_existing_tasks",
-      "type": "shell",
-      "command": "${workspaceFolder}/.vscode/terminate_existing_tasks.sh",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "silent",
-        "panel": "shared"
-      }
-    },
-    {
       "label": "front_node",
       "type": "shell",
       "command": "yarn dev",
@@ -26,7 +16,6 @@
         "panel": "dedicated",
         "group": "front_node"
       },
-      "dependsOn": "terminate_existing_tasks"
     },
     {
       "label": "back_node",
@@ -43,7 +32,6 @@
         "panel": "dedicated",
         "group": "back_node"
       },
-      "dependsOn": "terminate_existing_tasks"
     },
     {
       "label": "Deploy Contract Locally",
