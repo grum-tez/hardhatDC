@@ -57,6 +57,20 @@
       ],
       "problemMatcher": [],
       "group": "none"
+    },
+    {
+      "label": "End All",
+      "type": "shell",
+      "command": "yarn kill_nodes",
+      "group": "none",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
     }
   ]
 }
