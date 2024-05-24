@@ -2,10 +2,20 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "terminate_existing_tasks",
+      "type": "shell",
+      "command": "${workspaceFolder}/.vscode/terminate_existing_tasks.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "front_node",
       "type": "shell",
       "command": "yarn dev",
-      "group": "build",
+      "group": "none",
       "isBackground": true,
       "problemMatcher": [],
       "options": {
@@ -15,13 +25,14 @@
         "reveal": "always",
         "panel": "dedicated",
         "group": "front_node"
-      }
+      },
+      "dependsOn": "terminate_existing_tasks"
     },
     {
       "label": "back_node",
       "type": "shell",
       "command": "yarn local_node",
-      "group": "build",
+      "group": "none",
       "isBackground": true,
       "problemMatcher": [],
       "options": {
@@ -31,13 +42,14 @@
         "reveal": "always",
         "panel": "dedicated",
         "group": "back_node"
-      }
+      },
+      "dependsOn": "terminate_existing_tasks"
     },
     {
       "label": "Deploy Contract Locally",
       "type": "shell",
       "command": "yarn deployLocal",
-      "group": "build",
+      "group": "none",
       "dependsOn": "back_node",
       "problemMatcher": [],
       "options": {
@@ -56,7 +68,7 @@
         "Deploy Contract Locally"
       ],
       "problemMatcher": [],
-      "group": "build"
+      "group": "none"
     }
   ]
 }
