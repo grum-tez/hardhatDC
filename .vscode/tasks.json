@@ -73,13 +73,22 @@
       }
     },
     {
+      "label": "Wait 1 Second",
+      "type": "shell",
+      "command": "sleep 1",
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
       "label": "Restart",
       "dependsOn": [
         "End All",
+        "Wait 1 Second",
         "Start All"
       ],
       "problemMatcher": [],
-      "group": "none"
+      "group": "none",
+      "dependsOrder": "sequence"
     }
   ]
 }
