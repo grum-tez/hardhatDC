@@ -71,6 +71,15 @@
         "reveal": "always",
         "panel": "dedicated"
       }
+    },
+    {
+      "label": "Restart",
+      "dependsOn": [
+        "End All",
+        "Start All"
+      ],
+      "problemMatcher": [],
+      "group": "none"
     }
   ]
 }
