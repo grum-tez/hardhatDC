@@ -24,6 +24,7 @@
   "scripts": {
     "test": "npx hardhat test",
     "deployAndVerify": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network etherlinkTestnet --verify && node ../scripts/postDeployUpdateFrontend.js",
-    "deployLocal": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network localhost && node ../scripts/postDeployUpdateFrontend.js"
+    "deployLocal": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network localhost && node ../scripts/postDeployUpdateFrontend.js",
+    "node": "npx hardhat node"
   }
 }
