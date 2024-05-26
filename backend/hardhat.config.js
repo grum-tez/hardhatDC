@@ -11,6 +11,18 @@ module.exports = {
       accounts: [process.env.ETHERLINK_TESTNET_KEY],
     }
   },
+  networks: {
+    hardhat: {
+      accounts: {
+        mnemonic: process.env.SEED_PHRASE,
+      },
+      chainId: 1337,
+    },
+    etherlinkTestnet: {
+      url: "https://node.ghostnet.etherlink.com",
+      accounts: [process.env.ETHERLINK_TESTNET_KEY],
+    }
+  },
   etherscan: {
     apiKey: {
       etherlinkTestnet: process.env.ETHERSCAN_API_KEY,
