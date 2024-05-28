@@ -14,9 +14,9 @@ module.exports = {
   networks: {
     hardhat: {
       accounts: {
-        mnemonic: process.env.SEED_PHRASE,
+        mnemonic: process.env.METAMASK_DEV_SEED_PHRASE,
       },
-      chainId: 1337,
+      chainId: 31337,
     },
     etherlinkTestnet: {
       url: "https://node.ghostnet.etherlink.com",
