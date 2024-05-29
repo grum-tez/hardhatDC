@@ -1,8 +1,44 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+    "/workspaces/hardhatDC/backend/contracts/Token.sol": {
+      "lastModificationDate": 1716004495328,
+      "contentHash": "22043a34aac41f6465fb6525590dc0c7",
+      "sourceName": "contracts/Token.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Token"
+      ]
+    },
     "/workspaces/hardhatDC/backend/contracts/BattleContract1.sol": {
-      "lastModificationDate": 1716957766228,
+      "lastModificationDate": 1716576384473,
       "contentHash": "c47dbff4a449d3f60ff176d9130ddd9d",
       "sourceName": "contracts/BattleContract1.sol",
       "solcConfig": {
@@ -35,42 +71,6 @@
       ],
       "artifacts": [
         "BattleContract1"
-      ]
-    },
-    "/workspaces/hardhatDC/backend/contracts/Lock.sol": {
-      "lastModificationDate": 1716957071172,
-      "contentHash": "dacf0d5cb5b45dc83086de5bc1c26c2c",
-      "sourceName": "contracts/Lock.sol",
-      "solcConfig": {
-        "version": "0.8.24",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.24"
-      ],
-      "artifacts": [
-        "Lock"
       ]
     }
   }

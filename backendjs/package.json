@@ -1,0 +1,34 @@
+{
+  "name": "backendjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
+    "@nomicfoundation/hardhat-ethers": "^3.0.6",
+    "@nomicfoundation/hardhat-ignition": "^0.15.4",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.4",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.7",
+    "@nomicfoundation/ignition-core": "^0.15.4",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "chai": "4",
+    "ethers": "^6.12.1",
+    "hardhat": "^2.22.4",
+    "hardhat-gas-reporter": "^2.1.1",
+    "solidity-coverage": "^0.8.12",
+    "typechain": "^8.3.2"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "deployAndVerify": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network etherlinkTestnet --verify && node ../scripts/postDeployUpdateFrontend.js",
+    "deployLocal": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network localhost && node ../scripts/postDeployUpdateFrontend.js",
+    "local_node": "npx hardhat node",
+    "deployOnly:testnet": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
