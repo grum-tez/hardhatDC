@@ -9,7 +9,7 @@ async function main() {
   console.log("Generated new random wallet address:", randomWallet.address);
 
   // Connect the wallet to the provider
-  const provider = new ethers.providers.JsonRpcProvider();
+  const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
   const wallet = randomWallet.connect(provider);
 
   // Deploy the BattleContract using the new wallet address
