@@ -1,27 +1,10 @@
-const hre = require("hardhat");
-const { ethers } = hre;
+import hre from "hardhat";
+import BattleModule from "../ignition/modules/BattleModule";
 
 async function main() {
-  await hre.run('compile'); // We are compiling the contracts using Hardhat
+  const { battleContract } = await hre.ignition.deploy(BattleModule);
 
-  // Create a new random wallet
-  const randomWallet = ethers.Wallet.createRandom();
-  console.log("Generated new random wallet address:", randomWallet.address);
-
-  // Connect the wallet to the provider
-  const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
-  const wallet = randomWallet.connect(provider);
-
-  // Deploy the BattleContract using the new wallet address
-  const BattleContract = await ethers.getContractFactory("BattleContract1", wallet);
-  const battleContract = await BattleContract.deploy();
-
-  console.log("BattleContract deployed to:", battleContract.address);
+  console.log(`BattleContract deployed to: ${await battleContract.getAddress()}`);
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+main().catch(console.error);
