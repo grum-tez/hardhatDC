@@ -28,10 +28,10 @@
     },
     "scripts": {
       "test": "npx hardhat test",
-      "deployAndVerify": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network etherlinkTestnet --verify && node ../scripts/postDeployUpdateFrontend.js",
-      "deployLocal": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network localhost && node ../scripts/postDeployUpdateFrontend.js",
+      "deployAndVerify": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet --verify && node ../scripts/postDeployUpdateFrontend.js",
+      "deployLocal": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network localhost && node ../scripts/postDeployUpdateFrontend.js",
       "local_node": "npx hardhat node",
-      "deployOnly:testnet": "npx hardhat ignition deploy ignition/modules/BattleModule.js --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js"
+      "deployOnly:testnet": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js"
     },
     "dependencies": {
       "dotenv": "^16.4.5"
