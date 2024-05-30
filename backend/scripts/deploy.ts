@@ -1,5 +1,7 @@
 import { ethers } from "hardhat";
+const hre = require("hardhat");
 import BattleModule from "../ignition/modules/BattleModule";
+
 
 async function generateRandomAddress() {
   const wallet = ethers.Wallet.createRandom();
