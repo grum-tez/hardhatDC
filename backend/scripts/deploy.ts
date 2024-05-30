@@ -15,9 +15,7 @@ async function main() {
   const network = await hre.network.name;
   console.log(`Using network: ${network}`);
 
-  const { battleContract } = await hre.ignition.deploy(BattleModule, {
-    parameters: { BattleModule: { from: randomAddress } },
-  });
+  const { battleContract } = await hre.ignition.deploy(BattleModule);
 
   console.log(`BattleContract1 deployed to: ${await battleContract.getAddress()}`);
 }
