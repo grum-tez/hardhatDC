@@ -29,7 +29,7 @@
     "deployOnly:testnet": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js",
     "deployReset": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network localhost --reset",
     "deployScriptLocal": "npx hardhat run scripts/deploy.ts --network localhost",
-    "clear_local_deployments": "rm -rf backend/ignition/deployments/chain-31337/*"
+    "clear_local_deployments": "rm -rf ignition/deployments/chain-31337/*"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
