@@ -27,8 +27,8 @@
     "local:deploy_only": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network localhost",
     "local:update_frontend": "node ../scripts/postDeployUpdateFrontend.js 31337",
     "local:clear": "rm -rf ignition/deployments/chain-31337/*",
-    "testnet:deploy_only": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js",
-    "testnet:deploy_and_verify": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet --verify && node ../scripts/postDeployUpdateFrontend.js",
+    "testnet:deploy_only": "echo 'please update these scripts and include chain ID' && exit 1",
+    "testnet:deploy_and_verify": "echo 'please update these scripts and include chain ID' && exit 1",
     "local:redeploy": "yarn run local:clear && yarn run local:deploy_only && yarn run local:update_frontend"
   },
   "dependencies": {
