@@ -27,10 +27,8 @@
     "deployLocal": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network localhost && node ../scripts/postDeployUpdateFrontend.js",
     "local_node": "npx hardhat node",
     "deployOnly:testnet": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js",
-    "deployReset": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network localhost --reset",
-    "clear_local_deployments": "rm -rf ignition/deployments/chain-31337/*",
-    "deployScriptLocal": "yarn clear_local_deployments && npx hardhat run scripts/deploy.ts --network localhost"
-  },
+    "clear_local_deployments": "rm -rf ignition/deployments/chain-31337/*"
+    },
   "dependencies": {
     "dotenv": "^16.4.5"
   }
