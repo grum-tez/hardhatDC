@@ -3,8 +3,15 @@ const path = require('path');
 
 const backendDir = path.join(__dirname, '../backend');
 const frontendDir = path.join(__dirname, '../frontend');
-const battleContractArtifactPath = path.join(backendDir, 'ignition/deployments/chain-31337/artifacts/BattleModule#BattleContract1.json');
-const deployedAddressesPath = path.join(backendDir, 'ignition/deployments/chain-31337/deployed_addresses.json');
+
+const chainId = process.argv[2];
+if (!chainId) {
+  console.error('Please provide a chain ID as a parameter.');
+  process.exit(1);
+}
+
+const battleContractArtifactPath = path.join(backendDir, `ignition/deployments/chain-${chainId}/artifacts/BattleModule#BattleContract1.json`);
+const deployedAddressesPath = path.join(backendDir, `ignition/deployments/chain-${chainId}/deployed_addresses.json`);
 const frontendContractPath = path.join(frontendDir, 'src/contracts/BattleContract.json');
 
 async function main() {
