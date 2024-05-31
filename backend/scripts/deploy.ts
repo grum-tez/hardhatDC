@@ -7,4 +7,7 @@ async function main() {
   console.log(`BattleContract1 deployed to: ${await battleContract.getAddress()}`);
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error("Deployment failed with error:", error);
+  process.exit(1);
+});
