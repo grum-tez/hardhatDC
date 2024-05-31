@@ -34,7 +34,7 @@
     "local:clear": "rm -rf ignition/deployments/chain-31337/*",
     "testnet:deploy_only": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet && node ../scripts/postDeployUpdateFrontend.js",
     "testnet:deploy_and_verify": "npx hardhat ignition deploy ignition/modules/BattleModule.ts --network etherlinkTestnet --verify && node ../scripts/postDeployUpdateFrontend.js",
-    "local:redeploy": "npm run local:clear && npm run local:deploy_only && npm run local:update_frontend"
+    "local:redeploy": "yarn run local:clear && yarn run local:deploy_only && yarn run local:update_frontend"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
