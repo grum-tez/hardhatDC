@@ -9,7 +9,6 @@ import './App.css';
 
 const App: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
-  const [battleMasterChampionId, setBattleMasterChampionId] = useState<string | null>(null);
   const [userAddress, setUserAddress] = useState<string>('');
 
   const handleWalletConnected = (address: string) => {
@@ -28,9 +27,6 @@ const App: React.FC = () => {
       const contract = await getContract();
       const challengerData = await contract.getChallenger(address);
       const currentChampionId = challengerData[0];
-      const challengerDataString = JSON.stringify(challengerData, (key, value) =>
-        typeof value === 'bigint' ? value.toString() : value
-      );
       setFightRecords(challengerData[1]);
       if (currentChampionId) {
         setIsRegisteredChallenger(true);
@@ -57,9 +53,6 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchBattleMasterChampionId = async () => {
       try {
-        const contract = await getContract();
-        const id = await contract.battle_master_champion_id();
-        setBattleMasterChampionId(id.toString());
         setLoading(false);
       } catch (error) {
         console.error('Error fetching Battle Master Champion ID:', error);
