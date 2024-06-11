@@ -47,7 +47,7 @@ const App: React.FC = () => {
   const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
   const [currentChampionId, setCurrentChampionId] = useState<string | null>(null);
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
-  const [fightRecords, setFightRecords] = useState<string[]>([]);
+  const [fightRecords, setFightRecords] = useState<{ challenger: string; champion: string; result: string; date: string; }[]>([]);
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
   useEffect(() => {
@@ -130,7 +130,6 @@ const App: React.FC = () => {
             />
           ) : (
             <ChallengerDashboard
-              challengerAddress={userAddress}
               onFight={challengeBattleMaster}
               currentChampionId={currentChampionId}
               championMap={championMap}

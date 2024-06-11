@@ -25,22 +25,22 @@ import type {
 
 export declare namespace BattleContract1 {
   export type FightRecordStruct = {
-    fightTimestamp: BigNumberish;
-    didChallengerWin: boolean;
-    battlemasterChampion: string;
-    challengerChampion: string;
+    challenger: string;
+    champion: string;
+    result: string;
+    date: string;
   };
 
   export type FightRecordStructOutput = [
-    fightTimestamp: bigint,
-    didChallengerWin: boolean,
-    battlemasterChampion: string,
-    challengerChampion: string
+    challenger: string,
+    champion: string,
+    result: string,
+    date: string
   ] & {
-    fightTimestamp: bigint;
-    didChallengerWin: boolean;
-    battlemasterChampion: string;
-    challengerChampion: string;
+    challenger: string;
+    champion: string;
+    result: string;
+    date: string;
   };
 }
 
