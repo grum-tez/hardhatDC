@@ -5,6 +5,8 @@ import ChallengerDashboard from './components/ChallengerDashboard';
 import { fetchChampionMap, Champion } from './fetchChampionMap';
 import WalletCheck from './components/WalletCheck';
 import './App.css';
+import { ethers } from 'ethers';
+import hre from 'hardhat';
 
 
 const App: React.FC = () => {
@@ -42,12 +44,12 @@ const App: React.FC = () => {
       setIsRegisteredChallenger(false);
     }
   };
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
   const [currentChampionId, setCurrentChampionId] = useState<string | null>(null);
   const [selectedChampionId, setSelectedChampionId] = useState<string>('');
-  const [fightRecords, setFightRecords] = useState<any[]>([]);
+  const [fightRecords, setFightRecords] = useState<string[]>([]);
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
   useEffect(() => {
