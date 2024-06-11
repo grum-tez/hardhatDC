@@ -12,7 +12,7 @@ const HistoryComponent: React.FC<HistoryComponentProps> = ({ fightRecords }) => 
       {fightRecords.length > 0 ? (
         <ul>
           {fightRecords.map((record, index) => {
-            const serializedRecord = JSON.stringify(record, (key, value) =>
+            const serializedRecord = JSON.stringify(record, (_, value) =>
               typeof value === 'bigint' ? value.toString() : value
             );
             return <li key={index}>{serializedRecord}</li>;
