@@ -11,5 +11,7 @@ export const getContract = async () => {
   }
   const provider = new ethers.BrowserProvider(window.ethereum);
   const signer = await provider.getSigner();
-  return new ethers.Contract(contractAddress, contractABI, signer);
+  const contract = new ethers.Contract(contractAddress, contractABI, signer)
+  console.log(contract.interface)
+  return contract ;
 };
