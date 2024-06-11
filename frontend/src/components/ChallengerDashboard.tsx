@@ -7,14 +7,13 @@ import HistoryComponent from './HistoryComponent';
 import { Champion } from '../fetchChampionMap';
 
 type ChallengerDashboardProps = {
-  challengerAddress: string;
   onFight: () => void;
   currentChampionId: string | null;
   championMap: { [key: string]: Champion };
-  fightRecords: any[];
+  fightRecords: { challenger: string; champion: string; result: string; date: string }[];
 };
 
-const ChallengerDashboard: React.FC<ChallengerDashboardProps> = ({ challengerAddress, onFight, currentChampionId, championMap, fightRecords }) => {
+const ChallengerDashboard: React.FC<ChallengerDashboardProps> = ({ onFight, currentChampionId, championMap, fightRecords }) => {
   return (
     <div>
       <HistoryComponent fightRecords={fightRecords} />

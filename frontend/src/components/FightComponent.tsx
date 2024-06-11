@@ -4,12 +4,11 @@ import { Champion } from '../fetchChampionMap';
 
 type FightComponentProps = {
   onFight: () => void;
-  challengerAddress: string;
   championMap: { [key: string]: Champion };
   currentChampionId: string | null;
 };
 
-const FightComponent: React.FC<FightComponentProps> = ({ onFight, challengerAddress, championMap, currentChampionId }) => {
+const FightComponent: React.FC<FightComponentProps> = ({ onFight, championMap, currentChampionId }) => {
   const battleMasterImage = championMap['6']?.ipfsHash
     ? `https://ipfs.io/ipfs/${championMap['6'].ipfsHash}`
     : 'https://via.placeholder.com/100';
