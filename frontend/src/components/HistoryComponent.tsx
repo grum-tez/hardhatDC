@@ -1,10 +1,11 @@
 import React from 'react';
 
 type HistoryComponentProps = {
-  fightRecords: any[];
+  fightRecords: { challenger: string; champion: string; result: string; date: string; }[];
 };
 
 const HistoryComponent: React.FC<HistoryComponentProps> = ({ fightRecords }) => {
+  console.log(fightRecords)
   return (
     <div>
       <h2>Fight History</h2>
