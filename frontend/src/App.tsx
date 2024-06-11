@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Contract } from 'ethers';
 import { getContract } from './contractService';
 import ChampionSelection from './components/ChampionSelection';
 import ChallengerDashboard from './components/ChallengerDashboard';
@@ -121,6 +122,7 @@ const App: React.FC = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
+  }
 
   return (
     <div>
@@ -151,6 +153,9 @@ const App: React.FC = () => {
       {message && <p>{message}</p>}
     </div>
   );
+  );
 };
+
+export default App;
 
 export default App;
