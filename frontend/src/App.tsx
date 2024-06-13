@@ -79,7 +79,8 @@ const App: React.FC = () => {
   useEffect(() => {
     const setupContractListener = async () => {
       const contract = await getContract();
-      contract.on('ChallengerRegistered', (challengerAddress, championId) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      contract.on('ChallengerRegistered', (challengerAddress, _championId) => {
         if (challengerAddress.toLowerCase() === userAddress.toLowerCase()) {
           setIsRegisteredChallenger(true);
         }
