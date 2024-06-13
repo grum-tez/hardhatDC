@@ -80,10 +80,10 @@ const App: React.FC = () => {
   useEffect(() => {
     const setupContractListener = async () => {
       const contract = await getContract();
-      contract.on('ChallengerRegistered', (challenger, championId) => {
+      contract.on('ChallengerRegistered', (challengerAddress, championId) => {
         notification.open({
           message: 'Challenger Registered',
-          description: `Challenger ${challenger} has registered with Champion ID: ${championId}`,
+          description: `Challenger ${challengerAddress} has registered with Champion ID: ${championId}`,
         });
       });
 
