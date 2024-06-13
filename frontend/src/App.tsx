@@ -57,8 +57,9 @@ const App: React.FC = () => {
         const contract = await getContract();
         const challengerData = await contract.getChallenger(address);
         const currentChampionId = challengerData[0];
-        setCurrentChampionId(currentChampionId)
-        setIsRegisteredChallenger(currentChampionId.toLowerCase() === address.toLowerCase())
+        if (currentChampionId){
+          setCurrentChampionId(currentChampionId)
+        }  
         setFightRecords(challengerData[1]);
         setLoading(false)
         } catch (error) {
@@ -69,23 +70,27 @@ const App: React.FC = () => {
         const champions = await fetchChampionMap();
         setChampionMap(champions);
 
-      if (walletConnected) {
-        if (!walletAddress) {
-          setIsRegisteredChallenger(false);
-          return;
-        }
+      if (walletAddress) {
         await fetchChallengerDetails(walletAddress)
       }
     };
 
     initialize();
-  }, [walletConnected, walletAddress]);
+  }, [walletAddress]);
+
+  useEffect(() => {
+    console.log('currentChampionId:', currentChampionId);
+    if (currentChampionId) {
+      setIsRegisteredChallenger(true);
+    }
+  }, [currentChampionId]);
 
   useEffect(() => {
     const setupContractListener = async () => {
       const contract = await getContract();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       contract.on('ChallengerRegistered', (challengerAddress, _championId) => {
+        console.log("challenger Registered")
         if (challengerAddress.toLowerCase() === walletAddress.toLowerCase()) {
           setIsRegisteredChallenger(true);
         }
@@ -173,7 +178,7 @@ const App: React.FC = () => {
       ) : (
         <WalletCheck onWalletConnected={handleWalletConnected} />
       )}
-      {<p>Current champion ID: {currentChampionId || "N/A"}</p>}
+      {<p>{`Current champion ID: ${currentChampionId}` }</p>}
     </div>
   );
 };
