@@ -62,7 +62,7 @@ const App: React.FC = () => {
         setFightRecords(challengerData[1]);
         setLoading(false)
         } catch (error) {
-          console.error("error fetching challenger details")
+          console.error("Error fetching challenger details for address:", address, error);
         }
       }
 
