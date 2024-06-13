@@ -7,7 +7,6 @@ import WalletCheck from './components/WalletCheck';
 import './App.css';
 import { notification } from 'antd';
 
-
 const App: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
   const [userAddress, setUserAddress] = useState<string>('');
@@ -43,6 +42,7 @@ const App: React.FC = () => {
       setIsRegisteredChallenger(false);
     }
   };
+
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
   const [isRegisteredChallenger, setIsRegisteredChallenger] = useState<boolean>(false);
@@ -52,33 +52,37 @@ const App: React.FC = () => {
   const [championMap, setChampionMap] = useState<{ [key: string]: Champion }>({});
 
   useEffect(() => {
-    const fetchBattleMasterChampionId = async () => {
-      try {
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching Battle Master Champion ID:', error);
-        setLoading(false);
+    const initialize = async () => {
+      const fetchBattleMasterChampionId = async () => {
+        try {
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching Battle Master Champion ID:', error);
+          setLoading(false);
+        }
+      };
+
+      const fetchMap = async () => {
+        const champions = await fetchChampionMap();
+        setChampionMap(champions);
+      };
+
+      const contract = await getContract();
+      contract.on('ChallengerRegistered', (challenger, championId) => {
+        notification.open({
+          message: 'Challenger Registered',
+          description: `Challenger ${challenger} has registered with Champion ID: ${championId}`,
+        });
+      });
+
+      await fetchBattleMasterChampionId();
+      await fetchMap();
+      if (walletConnected) {
+        await checkIfRegisteredChallenger(userAddress);
       }
     };
 
-    const fetchMap = async () => {
-      const champions = await fetchChampionMap();
-      setChampionMap(champions);
-    };
-
-    const contract = await getContract();
-    contract.on('ChallengerRegistered', (challenger, championId) => {
-      notification.open({
-        message: 'Challenger Registered',
-        description: `Challenger ${challenger} has registered with Champion ID: ${championId}`,
-      });
-    });
-
-    fetchBattleMasterChampionId();
-    fetchMap();
-    if (walletConnected) {
-      checkIfRegisteredChallenger(userAddress);
-    }
+    initialize();
   }, [walletConnected, userAddress]);
 
   const handleSelectChampion = (id: string) => {
