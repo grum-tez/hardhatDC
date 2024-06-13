@@ -5,7 +5,6 @@ import ChallengerDashboard from './components/ChallengerDashboard';
 import { fetchChampionMap, Champion } from './fetchChampionMap';
 import WalletCheck from './components/WalletCheck';
 import './App.css';
-import { notification } from 'antd';
 
 const App: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
@@ -84,10 +83,6 @@ const App: React.FC = () => {
         if (challengerAddress.toLowerCase() === userAddress.toLowerCase()) {
           setIsRegisteredChallenger(true);
         }
-        notification.open({
-          message: 'Challenger Registered',
-          description: `Challenger ${challengerAddress} has registered with Champion ID: ${championId}. User Address: ${userAddress}`,
-        });
       });
 
       return () => {
