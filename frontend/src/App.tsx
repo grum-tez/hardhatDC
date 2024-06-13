@@ -5,6 +5,7 @@ import ChallengerDashboard from './components/ChallengerDashboard';
 import { fetchChampionMap, Champion } from './fetchChampionMap';
 import WalletCheck from './components/WalletCheck';
 import './App.css';
+import { notification } from 'antd';
 
 
 const App: React.FC = () => {
@@ -64,6 +65,14 @@ const App: React.FC = () => {
       const champions = await fetchChampionMap();
       setChampionMap(champions);
     };
+
+    const contract = await getContract();
+    contract.on('ChallengerRegistered', (challenger, championId) => {
+      notification.open({
+        message: 'Challenger Registered',
+        description: `Challenger ${challenger} has registered with Champion ID: ${championId}`,
+      });
+    });
 
     fetchBattleMasterChampionId();
     fetchMap();
