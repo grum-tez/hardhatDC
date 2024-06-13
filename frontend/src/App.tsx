@@ -8,39 +8,39 @@ import './App.css';
 
 const App: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
-  const [userAddress, setUserAddress] = useState<string>('');
+  const [walletAddress, setwalletAddress] = useState<string>('');
 
   const handleWalletConnected = (address: string) => {
-    setUserAddress(address);
+    setwalletAddress(address);
     setWalletConnected(true);
-    checkIfRegisteredChallenger(address);
+    // checkIfRegisteredChallenger(address);
   };
 
-  const checkIfRegisteredChallenger = async (address: string) => {
-    if (!address) {
-      setIsRegisteredChallenger(false);
-      return;
-    }
+  // const checkIfRegisteredChallenger = async (address: string) => {
+  //   if (!address) {
+  //     setIsRegisteredChallenger(false);
+  //     return;
+  //   }
 
-    try {
-      const contract = await getContract();
-      const challengerData = await contract.getChallenger(address);
-      const currentChampionId = challengerData[0];
-      setFightRecords(challengerData[1]);
-      if (currentChampionId) {
-        setIsRegisteredChallenger(true);
-        setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
-        setCurrentChampionId(currentChampionId);
-      } else {
-        setCurrentChampionId(currentChampionId);
-        setMessage(`Not registered as challenger.`);
-        setIsRegisteredChallenger(false);
-      }
-    } catch (error) {
-      console.error('Error checking if registered challenger:', error);
-      setIsRegisteredChallenger(false);
-    }
-  };
+  //   try {
+  //     const contract = await getContract();
+  //     const challengerData = await contract.getChallenger(address);
+  //     const currentChampionId = challengerData[0];
+  //     setFightRecords(challengerData[1]);
+  //     if (currentChampionId) {
+  //       setIsRegisteredChallenger(true);
+  //       setMessage(`Registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
+  //       setCurrentChampionId(currentChampionId);
+  //     } else {
+  //       setCurrentChampionId(currentChampionId);
+  //       setMessage(`Not registered as challenger.`);
+  //       setIsRegisteredChallenger(false);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking if registered challenger:', error);
+  //     setIsRegisteredChallenger(false);
+  //   }
+  // };
 
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string>('');
@@ -52,36 +52,41 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const fetchBattleMasterChampionId = async () => {
+      const fetchChallengerDetails = async (address: string) => {
         try {
-          setLoading(false);
+        const contract = await getContract();
+        const challengerData = await contract.getChallenger(address);
+        const currentChampionId = challengerData[0];
+        setCurrentChampionId(currentChampionId)
+        setIsRegisteredChallenger(currentChampionId.toLowerCase() === address.toLowerCase())
+        setFightRecords(challengerData[1]);
+        setLoading(false)
         } catch (error) {
-          console.error('Error fetching Battle Master Champion ID:', error);
-          setLoading(false);
+          console.error("error fetching challenger details")
         }
-      };
+      }
 
-      const fetchMap = async () => {
         const champions = await fetchChampionMap();
         setChampionMap(champions);
-      };
 
-      await fetchBattleMasterChampionId();
-      await fetchMap();
       if (walletConnected) {
-        await checkIfRegisteredChallenger(userAddress);
+        if (!walletAddress) {
+          setIsRegisteredChallenger(false);
+          return;
+        }
+        await fetchChallengerDetails(walletAddress)
       }
     };
 
     initialize();
-  }, [walletConnected, userAddress]);
+  }, [walletConnected, walletAddress]);
 
   useEffect(() => {
     const setupContractListener = async () => {
       const contract = await getContract();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       contract.on('ChallengerRegistered', (challengerAddress, _championId) => {
-        if (challengerAddress.toLowerCase() === userAddress.toLowerCase()) {
+        if (challengerAddress.toLowerCase() === walletAddress.toLowerCase()) {
           setIsRegisteredChallenger(true);
         }
       });
@@ -92,7 +97,7 @@ const App: React.FC = () => {
     };
 
     setupContractListener();
-  }, [userAddress]);
+  }, [walletAddress]);
 
 
   const handleSelectChampion = (id: string) => {
@@ -134,13 +139,18 @@ const App: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  // if (loading) {
+  //   return (
+  //   <div>
+  //   <p>Loading... </p>
+  //   {/* <WalletCheck onWalletConnected={handleWalletConnected}/>; */}
+  //   </div>
+  // )}
 
   return (
     <div>
-      <p>{walletConnected ? `Wallet is connected: ${userAddress}` : 'Wallet is not connected'}</p>
+      <p>loading? {`${loading}`}</p>
+      <p>{walletConnected ? `Wallet is connected: ${walletAddress}` : 'Wallet is not connected'}</p>
       {walletConnected ? (
         <div>
           <p>{isRegisteredChallenger ? `Registered as challenger. Current Champion ID: ${currentChampionId}` : `Not registered as challenger. Current Champion ID: ${currentChampionId}`}</p>
@@ -163,7 +173,7 @@ const App: React.FC = () => {
       ) : (
         <WalletCheck onWalletConnected={handleWalletConnected} />
       )}
-      {message && <p>{message}</p>}
+      {<p>Current champion ID: {currentChampionId || "N/A"}</p>}
     </div>
   );
 };

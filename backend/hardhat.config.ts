@@ -9,9 +9,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.24",
   networks: {
     hardhat: {
-      accounts: {
-        mnemonic: process.env.METAMASK_DEV_SEED_PHRASE || "test test test test test test test test test test test junk",
-      },
+
       chainId: 31337,
     },
     // etherlinkTestnet: {
