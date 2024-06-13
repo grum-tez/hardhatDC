@@ -81,9 +81,12 @@ const App: React.FC = () => {
     const setupContractListener = async () => {
       const contract = await getContract();
       contract.on('ChallengerRegistered', (challengerAddress, championId) => {
+        if (challengerAddress.toLowerCase() === userAddress.toLowerCase()) {
+          setIsRegisteredChallenger(true);
+        }
         notification.open({
           message: 'Challenger Registered',
-          description: `Challenger ${challengerAddress} has registered with Champion ID: ${championId}`,
+          description: `Challenger ${challengerAddress} has registered with Champion ID: ${championId}. User Address: ${userAddress}`,
         });
       });
 
@@ -93,7 +96,7 @@ const App: React.FC = () => {
     };
 
     setupContractListener();
-  }, []);
+  }, [userAddress]);
 
 
   const handleSelectChampion = (id: string) => {
