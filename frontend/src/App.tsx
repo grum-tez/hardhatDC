@@ -67,14 +67,6 @@ const App: React.FC = () => {
         setChampionMap(champions);
       };
 
-      const contract = await getContract();
-      contract.on('ChallengerRegistered', (challenger, championId) => {
-        notification.open({
-          message: 'Challenger Registered',
-          description: `Challenger ${challenger} has registered with Champion ID: ${championId}`,
-        });
-      });
-
       await fetchBattleMasterChampionId();
       await fetchMap();
       if (walletConnected) {
@@ -84,6 +76,25 @@ const App: React.FC = () => {
 
     initialize();
   }, [walletConnected, userAddress]);
+
+  useEffect(() => {
+    const setupContractListener = async () => {
+      const contract = await getContract();
+      contract.on('ChallengerRegistered', (challenger, championId) => {
+        notification.open({
+          message: 'Challenger Registered',
+          description: `Challenger ${challenger} has registered with Champion ID: ${championId}`,
+        });
+      });
+
+      return () => {
+        contract.off('ChallengerRegistered');
+      };
+    };
+
+    setupContractListener();
+  }, []);
+
 
   const handleSelectChampion = (id: string) => {
     setSelectedChampionId(id);
