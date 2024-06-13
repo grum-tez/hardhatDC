@@ -33,7 +33,7 @@ const App: React.FC = () => {
         setCurrentChampionId(currentChampionId);
       } else {
         setCurrentChampionId(currentChampionId);
-        setMessage(`Not registered as challenger. Current Champion ID: ${currentChampionId || 'N/A'}`);
+        setMessage(`Not registered as challenger.`);
         setIsRegisteredChallenger(false);
       }
     } catch (error) {
