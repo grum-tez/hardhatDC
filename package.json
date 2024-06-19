@@ -10,4 +10,3 @@
     "kill_nodes": "sh ./scripts/kill_dev_nodes.sh"
   }
 }
-
